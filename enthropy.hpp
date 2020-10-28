@@ -18,8 +18,10 @@ class Enthropy{
         float widthSpace;
         float heightSpace;
         std::pair<float, float> leftUpCorner;//y, x!
+        void setUpParameters();
+        static void crash(VPI a, VPI b);
     public:
-        Enthropy();
+        Enthropy() = default;
         Enthropy(unsigned int nofparticles);
         void sortParticlesX(VPI b, VPI e);
         void sortParticlesY(VPI b, VPI e);

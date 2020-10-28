@@ -12,12 +12,12 @@ class _vector{
 
     bool operator==(_vector a);
     _vector operator+(_vector a);
-    static _vector negation(_vector a);
+    inline static _vector negation(_vector a);
     _vector operator=(_vector a);
     _vector operator*(float f);
-    static float length(_vector a);
-    static _vector normalize(_vector a);
-    static float dotProduct(_vector a, _vector b);
+    inline static float length(_vector a);
+    inline static _vector normalize(_vector a);
+    inline static float dotProduct(_vector a, _vector b);
 };
 
 #endif

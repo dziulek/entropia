@@ -7,14 +7,13 @@ class Particle{
     private:
         _vector position;
         _vector speed;
-        _vector direction;
+        float radius;
         //color maybe
     public:
+        Particle() = default;
         _vector getPosition();
         _vector getSpeed();
-        _vector getDirection();
         void setPosition(const _vector a);
-        void setDirection(const _vector a);
         void setSpeed(const _vector a);
         void moveParticle(const _vector a);
         static bool collision(const Particle &a,const Particle &b);

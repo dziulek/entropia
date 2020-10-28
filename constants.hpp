@@ -8,5 +8,6 @@ float defaultNumParticles = 100;
 float defaultWidth = 200;
 float defaultHeight = 200;
 std::pair<float, float> defaultCorner = {10, 10};
+float radiusOfParticle = 3.0f;
 
 #endif

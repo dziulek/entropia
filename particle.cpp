@@ -5,9 +5,6 @@
 _vector Particle::getPosition(){
     return this->position;
 }
-_vector Particle::getDirection(){
-    return this->direction;
-}
 _vector Particle::getSpeed(){
     return this->speed;
 }
@@ -16,9 +13,6 @@ void Particle::moveParticle(const _vector a){
 }
 void Particle::setPosition(const _vector a){
     this->position = a;
-}
-void Particle::setDirection(const _vector a){
-    this->direction = a;
 }
 void Particle::setSpeed(const _vector a){
     this->speed = a;

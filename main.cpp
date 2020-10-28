@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ball.hpp"
+#include "particle.hpp"
 
 
 int main(){ 
