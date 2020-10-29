@@ -3,10 +3,10 @@
 
 #include <algorithm>
 #include <cmath>
-#include "particle.hpp"
 #include <vector>
 #include <_vector.hpp>
 #include <utility>
+#include "particle.hpp"
 
 typedef std::vector<Particle>::iterator VPI;
 
@@ -27,6 +27,8 @@ class Enthropy{
         void sortParticlesY(VPI b, VPI e);
         void setDirOfParticles(bool parallel = false);
         void moveParticles(const float deltaTime);
+        void loop(const float deltaTime);
+        void borderBounce(bool parallel = false);
 };
 
 #endif

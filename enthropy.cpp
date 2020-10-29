@@ -30,6 +30,20 @@ void Enthropy::setDirOfParticles(bool parallel = false){
         this->sortParticlesX(this->gas.begin(), this->gas.end());
 
         for(VPI i=this->gas.begin(); i!=this->gas.end();i++){
+            //borders bouncing
+            if(i->getPosition().x < leftUpCorner.first + epsilon && i->getSpeed().x < 0)
+                i->setSpeed({-i->getSpeed().x, i->getSpeed().y});
+
+            else if(i->getPosition().x < leftUpCorner.first + widthSpace - epsilon && i->getSpeed().x < 0)
+                    i->setSpeed({-i->getSpeed().x, i->getSpeed().y});
+
+            if(i->getPosition().y < leftUpCorner.second + epsilon && i->getSpeed().y < 0)
+                i->setSpeed({i->getSpeed().x, -i->getSpeed().y});
+
+            else if(i->getPosition().y < leftUpCorner.second + heightSpace - epsilon && i->getSpeed().y > 0)
+                    i->setSpeed({i->getSpeed().x, -i->getSpeed().y});
+
+            //particle bouncing
             auto ind = i + 1;
             while(ind != this->gas.end() && ind->getPosition().x - i->getPosition().x <= 2*radiusOfParticle + epsilon){
 
@@ -58,7 +72,6 @@ void Enthropy::moveParticles(const float deltaTime){
     for(auto i:this->gas){
         _vector newPosition = i.getPosition() + i.getSpeed()*deltaTime;
     }
-
 }
 
 void Enthropy::setUpParameters(){
@@ -66,6 +79,29 @@ void Enthropy::setUpParameters(){
 }
 
 void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
+
     _vector crashAxis = b->getPosition() + _vector::negation(a->getPosition());
+    _vector vaPerp, vbPerp, vaPar, vbPar;
+    crashAxis = _vector::normalize(crashAxis);
+
+    if(_vector::dotProduct(crashAxis, a->getSpeed()) < 0)
+        crashAxis = _vector::negation(crashAxis);
+
+    vaPar = crashAxis * _vector::dotProduct(a->getSpeed(), crashAxis);
+
+    if(_vector::dotProduct(crashAxis, b->getSpeed()) < 0)
+        crashAxis = _vector::negation(crashAxis);
+
+    vbPar = crashAxis * _vector::dotProduct(b->getSpeed(), crashAxis);
+
+    vaPerp = a->getSpeed() + _vector::negation(vaPar);
+    vbPerp = b->getSpeed() + _vector::negation(vbPar);
+
+    //finally
+    a->setSpeed(vbPar + vaPerp);
+    b->setSpeed(vaPar + vbPerp);
+}
+
+void Enthropy::loop(const float deltaTime){
     
 }
