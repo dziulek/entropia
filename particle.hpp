@@ -2,6 +2,7 @@
 #define PARTICLE_HPP   
 
 #include "_vector.hpp"
+#include "constants.hpp"
 
 class Particle{
     private:

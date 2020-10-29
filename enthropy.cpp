@@ -1,11 +1,4 @@
-#include <vector>
-#include <algorithm>
-#include <utility>
-#include <cmath>
-#include "particle.hpp"
 #include "enthropy.hpp"
-#include "_vector.hpp"
-#include "constants.hpp"
 
 typedef std::vector<Particle>::iterator VPI;
 
@@ -18,14 +11,14 @@ Enthropy::Enthropy(unsigned int nofparticles){
 }
 
 void Enthropy::sortParticlesX(VPI b, VPI e){
-    std::sort(b, e, [b, e](){return b->getPosition().x < e->getPosition().x;});
+    std::sort(b, e, [](Particle &s, Particle &t){return s.getPosition().x < t.getPosition().x;});
 }
 
 void Enthropy::sortParticlesY(VPI b, VPI e){
-    std::sort(b, e, [b, e](){return b->getPosition().y < e->getPosition().y;});
+    std::sort(b, e, [](Particle &s, Particle &t){return s.getPosition().y < t.getPosition().y;});
 }
 
-void Enthropy::setDirOfParticles(bool parallel = false){
+void Enthropy::setDirOfParticles(bool parallel){
     if(!parallel){
         this->sortParticlesX(this->gas.begin(), this->gas.end());
 

@@ -1,5 +1,4 @@
 #include "symulation.hpp"
-#include "constants.hpp"
 
 
 Symulation::Symulation(sf::RenderWindow &win){
@@ -11,7 +10,7 @@ void drawBox(){
 
 }
 
-void Symulation::drawParticles(bool parallel = false){
+void Symulation::drawParticles(bool parallel){
 
     sf::CircleShape circle(radiusOfParticle);
 
@@ -33,6 +32,5 @@ void Symulation::showView(sf::View &view){
 
     drawBox();
     drawParticles(false);
-
 
 }

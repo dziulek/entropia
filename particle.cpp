@@ -1,6 +1,4 @@
 #include "particle.hpp"
-#include "_vector.hpp"
-#include "constants.hpp"
 
 _vector Particle::getPosition(){
     return this->position;

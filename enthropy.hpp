@@ -1,12 +1,14 @@
 #ifndef ENTHROPY_HPP
 #define ENTHROPY_HPP
 
-#include <algorithm>
-#include <cmath>
 #include <vector>
-#include "_vector.hpp"
+#include <algorithm>
 #include <utility>
+#include <cmath>
 #include "particle.hpp"
+#include "enthropy.hpp"
+#include "_vector.hpp"
+#include "constants.hpp"
 
 typedef std::vector<Particle>::iterator VPI;
 
@@ -21,7 +23,7 @@ class Enthropy{
         void setUpParameters();
         static void crash(VPI a, VPI b);
     public:
-        Enthropy() = default;
+        Enthropy();
         Enthropy(unsigned int nofparticles);
         std::vector<Particle> & getParticles();
         void sortParticlesX(VPI b, VPI e);

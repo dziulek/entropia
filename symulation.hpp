@@ -6,6 +6,7 @@
 #include "SFML/System.hpp"
 #include "enthropy.hpp"
 #include "renderer.hpp"
+#include "constants.hpp"
 
 class Symulation : public Renderer{
 
