@@ -1,3 +1,3 @@
 # entropia
 
-projekt symulujący entropię gazu w przedstrzeni dwuwymiarowej
+projekt symulujący entropię gazu w przestrzeni dwuwymiarowej
