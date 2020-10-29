@@ -1,4 +1,4 @@
-#ifndef PARTICLEL_HPP
+#ifndef PARTICLE_HPP
 #define PARTICLE_HPP   
 
 #include "_vector.hpp"

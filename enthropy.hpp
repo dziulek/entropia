@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
-#include <_vector.hpp>
+#include "_vector.hpp"
 #include <utility>
 #include "particle.hpp"
 
@@ -23,12 +23,15 @@ class Enthropy{
     public:
         Enthropy() = default;
         Enthropy(unsigned int nofparticles);
+        std::vector<Particle> & getParticles();
         void sortParticlesX(VPI b, VPI e);
         void sortParticlesY(VPI b, VPI e);
         void setDirOfParticles(bool parallel = false);
         void moveParticles(const float deltaTime);
         void loop(const float deltaTime);
         void borderBounce(bool parallel = false);
+        float calcEnthropy();
+        bool setStartPos();
 };
 
 #endif

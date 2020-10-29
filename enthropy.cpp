@@ -104,4 +104,18 @@ void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
 
 void Enthropy::loop(const float deltaTime){
     
+    setDirOfParticles(false);
+    moveParticles(deltaTime);
+
+}
+
+std::vector<Particle> & Enthropy::getParticles(){
+    return this->gas;
+}
+
+bool Enthropy::setStartPos(){
+    //for testing
+    for(auto i : this->gas){
+            i.setPosition({radiusOfParticle*3.0*i.getPosition().x, 100.0f});
+    }
 }
