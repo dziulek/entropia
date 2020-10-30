@@ -16,7 +16,7 @@ CMakeFiles/Enthropy.dir/main.cpp.o: ../enthropy.hpp
 CMakeFiles/Enthropy.dir/main.cpp.o: ../main.cpp
 CMakeFiles/Enthropy.dir/main.cpp.o: ../particle.hpp
 CMakeFiles/Enthropy.dir/main.cpp.o: ../renderer.hpp
-CMakeFiles/Enthropy.dir/main.cpp.o: ../symulation.hpp
+CMakeFiles/Enthropy.dir/main.cpp.o: ../simulation.hpp
 
 CMakeFiles/Enthropy.dir/particle.cpp.o: ../_vector.hpp
 CMakeFiles/Enthropy.dir/particle.cpp.o: ../constants.hpp
@@ -28,11 +28,11 @@ CMakeFiles/Enthropy.dir/plot.cpp.o: ../plot.cpp
 CMakeFiles/Enthropy.dir/renderer.cpp.o: ../renderer.cpp
 CMakeFiles/Enthropy.dir/renderer.cpp.o: ../renderer.hpp
 
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../_vector.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../constants.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../enthropy.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../particle.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../renderer.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../symulation.cpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../symulation.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../_vector.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../constants.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../enthropy.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../particle.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../renderer.hpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../simulation.cpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../simulation.hpp
 

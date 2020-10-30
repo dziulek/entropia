@@ -154,18 +154,18 @@ CMakeFiles/Enthropy.dir/renderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Enthropy.dir/renderer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/piotr/Dokumenty/myProjects/entropia/renderer.cpp -o CMakeFiles/Enthropy.dir/renderer.cpp.s
 
-CMakeFiles/Enthropy.dir/symulation.cpp.o: CMakeFiles/Enthropy.dir/flags.make
-CMakeFiles/Enthropy.dir/symulation.cpp.o: ../symulation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Enthropy.dir/symulation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Enthropy.dir/symulation.cpp.o -c /home/piotr/Dokumenty/myProjects/entropia/symulation.cpp
+CMakeFiles/Enthropy.dir/simulation.cpp.o: CMakeFiles/Enthropy.dir/flags.make
+CMakeFiles/Enthropy.dir/simulation.cpp.o: ../simulation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Enthropy.dir/simulation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Enthropy.dir/simulation.cpp.o -c /home/piotr/Dokumenty/myProjects/entropia/simulation.cpp
 
-CMakeFiles/Enthropy.dir/symulation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Enthropy.dir/symulation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/piotr/Dokumenty/myProjects/entropia/symulation.cpp > CMakeFiles/Enthropy.dir/symulation.cpp.i
+CMakeFiles/Enthropy.dir/simulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Enthropy.dir/simulation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/piotr/Dokumenty/myProjects/entropia/simulation.cpp > CMakeFiles/Enthropy.dir/simulation.cpp.i
 
-CMakeFiles/Enthropy.dir/symulation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Enthropy.dir/symulation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/piotr/Dokumenty/myProjects/entropia/symulation.cpp -o CMakeFiles/Enthropy.dir/symulation.cpp.s
+CMakeFiles/Enthropy.dir/simulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Enthropy.dir/simulation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/piotr/Dokumenty/myProjects/entropia/simulation.cpp -o CMakeFiles/Enthropy.dir/simulation.cpp.s
 
 # Object files for target Enthropy
 Enthropy_OBJECTS = \
@@ -175,7 +175,7 @@ Enthropy_OBJECTS = \
 "CMakeFiles/Enthropy.dir/particle.cpp.o" \
 "CMakeFiles/Enthropy.dir/plot.cpp.o" \
 "CMakeFiles/Enthropy.dir/renderer.cpp.o" \
-"CMakeFiles/Enthropy.dir/symulation.cpp.o"
+"CMakeFiles/Enthropy.dir/simulation.cpp.o"
 
 # External object files for target Enthropy
 Enthropy_EXTERNAL_OBJECTS =
@@ -186,7 +186,7 @@ Enthropy: CMakeFiles/Enthropy.dir/main.cpp.o
 Enthropy: CMakeFiles/Enthropy.dir/particle.cpp.o
 Enthropy: CMakeFiles/Enthropy.dir/plot.cpp.o
 Enthropy: CMakeFiles/Enthropy.dir/renderer.cpp.o
-Enthropy: CMakeFiles/Enthropy.dir/symulation.cpp.o
+Enthropy: CMakeFiles/Enthropy.dir/simulation.cpp.o
 Enthropy: CMakeFiles/Enthropy.dir/build.make
 Enthropy: CMakeFiles/Enthropy.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Enthropy"

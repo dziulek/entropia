@@ -7,9 +7,17 @@
 #IncludeRegexTransform: 
 
 /home/piotr/Dokumenty/myProjects/entropia/_vector.hpp
+cmath
+-
 
 /home/piotr/Dokumenty/myProjects/entropia/constants.hpp
 utility
+-
+
+/home/piotr/Dokumenty/myProjects/entropia/enthropy.cpp
+enthropy.hpp
+/home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
+iostream
 -
 
 /home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
@@ -19,58 +27,16 @@ algorithm
 -
 utility
 -
-cmath
+iostream
 -
 particle.hpp
 /home/piotr/Dokumenty/myProjects/entropia/particle.hpp
-enthropy.hpp
-/home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
 _vector.hpp
 /home/piotr/Dokumenty/myProjects/entropia/_vector.hpp
-constants.hpp
-/home/piotr/Dokumenty/myProjects/entropia/constants.hpp
-
-/home/piotr/Dokumenty/myProjects/entropia/main.cpp
-SFML/Graphics.hpp
--
-SFML/Window.hpp
--
-SFML/System.hpp
--
-renderer.hpp
-/home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
-enthropy.hpp
-/home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
-symulation.hpp
-/home/piotr/Dokumenty/myProjects/entropia/symulation.hpp
-constants.hpp
-/home/piotr/Dokumenty/myProjects/entropia/constants.hpp
 
 /home/piotr/Dokumenty/myProjects/entropia/particle.hpp
 _vector.hpp
 /home/piotr/Dokumenty/myProjects/entropia/_vector.hpp
-constants.hpp
-/home/piotr/Dokumenty/myProjects/entropia/constants.hpp
-
-/home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
-SFML/Graphics.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/Graphics.hpp
-SFML/Window.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/Window.hpp
-SFML/System.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/System.hpp
-
-/home/piotr/Dokumenty/myProjects/entropia/symulation.hpp
-SFML/Graphics.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/Graphics.hpp
-SFML/Window.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/Window.hpp
-SFML/System.hpp
-/home/piotr/Dokumenty/myProjects/entropia/SFML/System.hpp
-enthropy.hpp
-/home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
-renderer.hpp
-/home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
 constants.hpp
 /home/piotr/Dokumenty/myProjects/entropia/constants.hpp
 

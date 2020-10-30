@@ -1,10 +1,7 @@
 #include "enthropy.hpp"
+#include <iostream>
 
 typedef std::vector<Particle>::iterator VPI;
-
-Enthropy::Enthropy(){
-    this->nOfParticles = defaultNumParticles;
-}
 
 Enthropy::Enthropy(unsigned int nofparticles){
     this->nOfParticles = defaultNumParticles;
@@ -108,7 +105,7 @@ std::vector<Particle> & Enthropy::getParticles(){
 
 bool Enthropy::setStartPos(){
     //for testing
-    for(auto i : this->gas){
-            i.setPosition({radiusOfParticle*3.0*i.getPosition().x, 100.0f});
+    for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
+            i->setPosition({100.0f, 100.0f});
     }
 }

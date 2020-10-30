@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/piotr/Dokumenty/myProjects/entropia/particle.cpp" "/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir/particle.cpp.o"
   "/home/piotr/Dokumenty/myProjects/entropia/plot.cpp" "/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir/plot.cpp.o"
   "/home/piotr/Dokumenty/myProjects/entropia/renderer.cpp" "/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir/renderer.cpp.o"
-  "/home/piotr/Dokumenty/myProjects/entropia/symulation.cpp" "/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir/symulation.cpp.o"
+  "/home/piotr/Dokumenty/myProjects/entropia/simulation.cpp" "/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir/simulation.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -17,7 +17,7 @@ CMakeFiles/Enthropy.dir/main.cpp.o
  /home/piotr/Dokumenty/myProjects/entropia/main.cpp
  /home/piotr/Dokumenty/myProjects/entropia/particle.hpp
  /home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
- /home/piotr/Dokumenty/myProjects/entropia/symulation.hpp
+ /home/piotr/Dokumenty/myProjects/entropia/simulation.hpp
 CMakeFiles/Enthropy.dir/particle.cpp.o
  /home/piotr/Dokumenty/myProjects/entropia/_vector.hpp
  /home/piotr/Dokumenty/myProjects/entropia/constants.hpp
@@ -28,11 +28,11 @@ CMakeFiles/Enthropy.dir/plot.cpp.o
 CMakeFiles/Enthropy.dir/renderer.cpp.o
  /home/piotr/Dokumenty/myProjects/entropia/renderer.cpp
  /home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
-CMakeFiles/Enthropy.dir/symulation.cpp.o
+CMakeFiles/Enthropy.dir/simulation.cpp.o
  /home/piotr/Dokumenty/myProjects/entropia/_vector.hpp
  /home/piotr/Dokumenty/myProjects/entropia/constants.hpp
  /home/piotr/Dokumenty/myProjects/entropia/enthropy.hpp
  /home/piotr/Dokumenty/myProjects/entropia/particle.hpp
  /home/piotr/Dokumenty/myProjects/entropia/renderer.hpp
- /home/piotr/Dokumenty/myProjects/entropia/symulation.cpp
- /home/piotr/Dokumenty/myProjects/entropia/symulation.hpp
+ /home/piotr/Dokumenty/myProjects/entropia/simulation.cpp
+ /home/piotr/Dokumenty/myProjects/entropia/simulation.hpp

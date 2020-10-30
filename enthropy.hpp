@@ -4,11 +4,10 @@
 #include <vector>
 #include <algorithm>
 #include <utility>
-#include <cmath>
+#include <iostream>
 #include "particle.hpp"
-#include "enthropy.hpp"
 #include "_vector.hpp"
-#include "constants.hpp"
+
 
 typedef std::vector<Particle>::iterator VPI;
 
@@ -23,7 +22,12 @@ class Enthropy{
         void setUpParameters();
         static void crash(VPI a, VPI b);
     public:
-        Enthropy();
+        Enthropy(){//reallyyyy ugly
+            this->nOfParticles = defaultNumParticles;
+            Particle particle;
+            this->gas.assign(defaultNumParticles, particle);
+            bool fun = setStartPos();
+        }
         Enthropy(unsigned int nofparticles);
         std::vector<Particle> & getParticles();
         void sortParticlesX(VPI b, VPI e);

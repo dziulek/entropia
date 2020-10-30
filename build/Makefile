@@ -304,32 +304,32 @@ renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/renderer.cpp.s
 .PHONY : renderer.cpp.s
 
-symulation.o: symulation.cpp.o
+simulation.o: simulation.cpp.o
 
-.PHONY : symulation.o
+.PHONY : simulation.o
 
 # target to build an object file
-symulation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/symulation.cpp.o
-.PHONY : symulation.cpp.o
+simulation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/simulation.cpp.o
+.PHONY : simulation.cpp.o
 
-symulation.i: symulation.cpp.i
+simulation.i: simulation.cpp.i
 
-.PHONY : symulation.i
+.PHONY : simulation.i
 
 # target to preprocess a source file
-symulation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/symulation.cpp.i
-.PHONY : symulation.cpp.i
+simulation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/simulation.cpp.i
+.PHONY : simulation.cpp.i
 
-symulation.s: symulation.cpp.s
+simulation.s: simulation.cpp.s
 
-.PHONY : symulation.s
+.PHONY : simulation.s
 
 # target to generate assembly for a file
-symulation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/symulation.cpp.s
-.PHONY : symulation.cpp.s
+simulation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Enthropy.dir/build.make CMakeFiles/Enthropy.dir/simulation.cpp.s
+.PHONY : simulation.cpp.s
 
 # Help Target
 help:
@@ -358,9 +358,9 @@ help:
 	@echo "... renderer.o"
 	@echo "... renderer.i"
 	@echo "... renderer.s"
-	@echo "... symulation.o"
-	@echo "... symulation.i"
-	@echo "... symulation.s"
+	@echo "... simulation.o"
+	@echo "... simulation.i"
+	@echo "... simulation.s"
 .PHONY : help
 
 

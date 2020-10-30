@@ -5,7 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Enthropy.dir/particle.cpp.o"
   "CMakeFiles/Enthropy.dir/plot.cpp.o"
   "CMakeFiles/Enthropy.dir/renderer.cpp.o"
-  "CMakeFiles/Enthropy.dir/symulation.cpp.o"
+  "CMakeFiles/Enthropy.dir/simulation.cpp.o"
   "Enthropy"
   "Enthropy.pdb"
 )

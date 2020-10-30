@@ -10,14 +10,15 @@ class Renderer{
         sf::RenderWindow *window;
 
     public:
-        Renderer() = default;
-        Renderer(sf::RenderWindow &win);
+        Renderer(sf::RenderWindow &win){
+            this->window = &win;
+        };
         sf::RenderWindow* getWindow();
-        virtual void showView(sf::View &v);
+        virtual void showView();
         static void scaleView(sf::View &v, float factor);
         void manageViews(sf::View &box, sf::View &stats, sf::View &plot);
         void resizeWindow();
-        virtual void keycallback();
+        void keycallback();
 
         static void RenderWindow();
 };
