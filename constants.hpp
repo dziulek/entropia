@@ -9,5 +9,7 @@ const float defaultWidth = 200;
 const float defaultHeight = 200;
 const std::pair<float, float> defaultCorner = {10, 10};
 const float radiusOfParticle = 30.0f;
+const float rim = 10.0f;
+
 
 #endif

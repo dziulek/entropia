@@ -12,25 +12,16 @@ int main()
     Enthropy enthropy;
     Simulation sim(window, enthropy, view);
 
-    std::cout<<"siemano"<<std::endl;
-
-    // run the program as long as the window is open
     while (sim.getWindow()->isOpen())
     {
-        // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (sim.getWindow()->pollEvent(event))
         {
-            // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-        // clear the window with black color
         sim.getWindow()->clear(sf::Color::Blue);
-
-        // draw everything here...
-        // window.draw(...);
 
         sim.showView();
         // end the current frame

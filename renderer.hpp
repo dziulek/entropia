@@ -16,8 +16,7 @@ class Renderer{
         sf::RenderWindow* getWindow();
         virtual void showView();
         static void scaleView(sf::View &v, float factor);
-        void manageViews(sf::View &box, sf::View &stats, sf::View &plot);
-        void resizeWindow();
+        //void resizeView();
         void keycallback();
 
         static void RenderWindow();

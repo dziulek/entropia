@@ -1,9 +1,22 @@
 #include "simulation.hpp"
 #include <iostream>
+#include "SFML/Graphics.hpp"
+#include "SFML/Window.hpp"
+#include "SFML/System.hpp"
 
 
 void Simulation::drawBox(){
+    sf::Vector2f viewSize = this->simView.getSize();
 
+    sf::Vertex lineStrip[5] ={
+        sf::Vertex(sf::Vector2f(rim, rim)),
+        sf::Vertex(sf::Vector2f(rim, viewSize.y - rim)),
+        sf::Vertex(sf::Vector2f(viewSize.x - rim, viewSize.y - rim)),
+        sf::Vertex(sf::Vector2f(viewSize.x - rim, rim)),
+        sf::Vertex(sf::Vector2f(rim, rim))
+    };
+
+    this->window->draw(lineStrip, 5, sf::LineStrip);
 }
 
 void Simulation::drawParticles(bool parallel){
@@ -15,7 +28,6 @@ void Simulation::drawParticles(bool parallel){
         for(auto i : this->enthropy->getParticles()){
 
             circle.setPosition(i.getPosition().x, i.getPosition().y);
-            //std::cout<<i.getPosition().x<<" "<<i.getPosition().y<<" "<<j++<<std::endl;
             window->draw(circle);
         }
     }
