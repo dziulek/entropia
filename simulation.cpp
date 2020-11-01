@@ -36,7 +36,7 @@ void Simulation::drawParticles(bool parallel){
     sf::CircleShape circle(this->enthropy->getRadiusOfParticle());
 
     circle.setOrigin(sf::Vector2f(this->enthropy->getRadiusOfParticle(), this->enthropy->getRadiusOfParticle()));
-    circle.setFillColor(sf::Color::Red);
+    circle.setFillColor(sf::Color::White);
     int j = 0;
     if(!parallel){
         for(auto i : this->enthropy->getParticles()){

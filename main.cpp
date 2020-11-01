@@ -7,11 +7,13 @@ int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
-    sf::View view(sf::FloatRect(0,0,1000, 1000));
+    sf::View view(sf::FloatRect(0,0,1200, 1200));
     view.setViewport(sf::FloatRect(0 ,0 , 2.0f/3, 1));
 
     Enthropy enthropy;
     Simulation sim(window, enthropy, view);
+
+    sim.startSimulation();
 
     while (sim.getWindow()->isOpen())
     {
@@ -22,7 +24,9 @@ int main()
                 window.close();
         }
 
-        sim.getWindow()->clear(sf::Color::Blue);
+        enthropy.loop(1.0f/30);
+
+        sim.getWindow()->clear(sf::Color::Black);
 
         sim.showView();
         // end the current frame

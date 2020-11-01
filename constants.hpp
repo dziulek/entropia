@@ -3,8 +3,8 @@
 
 #include <utility>
 
-const float epsilon = 0.0001;
-const float defaultNumParticles = 100;
+const float epsilon = 0.1;
+const float defaultNumParticles = 10000;
 const float defaultWidth = 200;
 const float defaultHeight = 200;
 const std::pair<float, float> defaultCorner = {10.0f, 10.0f};
@@ -13,6 +13,8 @@ const float minimumRadius = 1.0f;
 const float StartDensityOfParticles = 0.8; //fraction of radius of particle
 const std::pair<float, float> defaultSizeOfStartBox = {300.0f, 300.0f};
 const float rim = 10.0f;
+
+const float avspeed = 40.0f;
 
 
 #endif

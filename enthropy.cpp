@@ -17,46 +17,54 @@ void Enthropy::setDirOfParticles(bool parallel){
 
         for(VPI i=this->gas.begin(); i!=this->gas.end();i++){
             //borders bouncing
-            if(i->getPosition().x < leftUpCorner.first + epsilon && i->getSpeed().x < 0)
-                i->setSpeed({-i->getSpeed().x, i->getSpeed().y});
+            if(i->getPosition().x < epsilon + radiusOfParticle && i->getSpeed().x < 0){
+                i->setSpeed({ -i->getSpeed().x, i->getSpeed().y});
+            }
+                
 
-            else if(i->getPosition().x < leftUpCorner.first + widthSpace - epsilon && i->getSpeed().x < 0)
+            else if(i->getPosition().x > widthSpace - epsilon - radiusOfParticle && i->getSpeed().x > 0)
                     i->setSpeed({-i->getSpeed().x, i->getSpeed().y});
 
-            if(i->getPosition().y < leftUpCorner.second + epsilon && i->getSpeed().y < 0)
+            if(i->getPosition().y < epsilon + radiusOfParticle && i->getSpeed().y < 0)
                 i->setSpeed({i->getSpeed().x, -i->getSpeed().y});
 
-            else if(i->getPosition().y < leftUpCorner.second + heightSpace - epsilon && i->getSpeed().y > 0)
+            else if(i->getPosition().y > heightSpace - epsilon - radiusOfParticle && i->getSpeed().y > 0)
                     i->setSpeed({i->getSpeed().x, -i->getSpeed().y});
 
             //particle bouncing
             auto ind = i + 1;
             while(ind != this->gas.end() && ind->getPosition().x - i->getPosition().x <= 2*radiusOfParticle + epsilon){
 
-                _vector between = i->getSpeed() + _vector::negation(ind->getSpeed());
-                float a = _vector::dotProduct(between, ind->getSpeed());
-                float b = _vector::dotProduct(between, i->getSpeed());
+                _vector speedBetween = ind->getSpeed() + _vector::negation(i->getSpeed());
+                
+                float a = _vector::dotProduct(speedBetween, i->getSpeed());
+                float b = _vector::dotProduct(_vector::negation(speedBetween), i->getSpeed());
 
-                if(a < 0 && b < 0){
+                _vector positionBetween = i->getPosition() + _vector::negation(ind->getPosition());
+
+                if(a >= -epsilon && b >= -epsilon){
                     ind ++;
                     continue;
                 }
 
-                if(_vector::length(between) < epsilon){
+                if(_vector::length(positionBetween) < 2 * radiusOfParticle + epsilon){
                     crash(i, ind);
                 }
+                ind++;
             }
         }
     }
     else {
-
+            
     }
 }
 
 void Enthropy::moveParticles(const float deltaTime){
 
-    for(auto i:this->gas){
-        _vector newPosition = i.getPosition() + i.getSpeed()*deltaTime;
+    for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
+
+        _vector newPosition = i->getPosition() + i->getSpeed()*deltaTime;
+        i->setPosition(newPosition);
     }
 }
 
@@ -72,8 +80,8 @@ void Enthropy::setUpParameters(){
     this->leftUpCorner = defaultCorner;
     this->rightDownCornerStartBox = {leftUpCorner.first + defaultSizeOfStartBox.first, 
                                         leftUpCorner.second + defaultSizeOfStartBox.second};
-    
-    this->gas.resize(nOfParticles);
+    this->averageSpeed = avspeed;
+    this->gas.resize((int)inRow * (int)inRow);
 }
 
 void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
@@ -145,11 +153,14 @@ void Enthropy::setStartSpeed(){
         float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         float x = r * 2 * averageSpeed - averageSpeed;
 
-        i->setSpeed({ x, float(pow(-1, rand()%2)) * (float)sqrt( averageSpeed - x * x)});
+        r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float y = r * 2 * averageSpeed - averageSpeed;
+
+        i->setSpeed({ x, y});
     }
 }
 
-void Enthropy::startSimulation(){
+void Enthropy::releaseParticles(){
     
     this->start = 1;
 

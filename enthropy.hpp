@@ -43,7 +43,7 @@ class Enthropy{
             setStartSpeed();
         }
         std::vector<Particle> & getParticles();
-        void startSimulation();
+        void releaseParticles();
         void sortParticlesX(VPI b, VPI e);
         void sortParticlesY(VPI b, VPI e);
         void setDirOfParticles(bool parallel = false);

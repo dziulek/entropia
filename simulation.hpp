@@ -23,6 +23,7 @@ class Simulation : public Renderer{
         void showView() override;
         void drawBox();
         void drawParticles(bool parallel = false);
+        void startSimulation(){ this->enthropy->releaseParticles(); }
 };
 
 #endif
