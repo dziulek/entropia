@@ -3,10 +3,6 @@
 
 typedef std::vector<Particle>::iterator VPI;
 
-Enthropy::Enthropy(unsigned int nofparticles){
-    this->nOfParticles = defaultNumParticles;
-}
-
 void Enthropy::sortParticlesX(VPI b, VPI e){
     std::sort(b, e, [](Particle &s, Particle &t){return s.getPosition().x < t.getPosition().x;});
 }
@@ -65,7 +61,19 @@ void Enthropy::moveParticles(const float deltaTime){
 }
 
 void Enthropy::setUpParameters(){
+    
+    float inRow = (int)ceil(sqrt(float(nOfParticles)));
 
+    this->radiusOfParticle = sqrt(defaultSizeOfStartBox.first * defaultSizeOfStartBox.second) / ((2 + StartDensityOfParticles) * inRow);
+
+    this->widthSpace = defaultSizeOfStartBox.first;//at the beginning when var start =0
+    this->heightSpace = defaultSizeOfStartBox.first;
+
+    this->leftUpCorner = defaultCorner;
+    this->rightDownCornerStartBox = {leftUpCorner.first + defaultSizeOfStartBox.first, 
+                                        leftUpCorner.second + defaultSizeOfStartBox.second};
+    
+    this->gas.resize(nOfParticles);
 }
 
 void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
@@ -103,9 +111,49 @@ std::vector<Particle> & Enthropy::getParticles(){
     return this->gas;
 }
 
-bool Enthropy::setStartPos(){
-    //for testing
-    for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
-            i->setPosition({100.0f, 100.0f});
+void Enthropy::setStartPos(){
+
+    srand(time(NULL));
+
+    int n = nOfParticles;
+    float x = leftUpCorner.first + radiusOfParticle;
+    float y = leftUpCorner.second + radiusOfParticle;
+
+    VPI i = this->gas.begin();
+
+    while(y < rightDownCornerStartBox.second - radiusOfParticle){
+        
+        while(x < rightDownCornerStartBox.first - radiusOfParticle){
+            
+            i->setPosition({x, y});  
+            x += (2 * radiusOfParticle + StartDensityOfParticles * radiusOfParticle);
+            if(++i == this->gas.end())break;
+        }
+            x = leftUpCorner.first + radiusOfParticle;
+        if(i == this->gas.end())break;
+
+        y += radiusOfParticle * (2 + StartDensityOfParticles);
     }
+}
+
+void Enthropy::setStartSpeed(){
+    
+    std::srand(time(NULL));
+    
+    for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
+
+        float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float x = r * 2 * averageSpeed - averageSpeed;
+
+        i->setSpeed({ x, float(pow(-1, rand()%2)) * (float)sqrt( averageSpeed - x * x)});
+    }
+}
+
+void Enthropy::startSimulation(){
+    
+    this->start = 1;
+
+    this->heightSpace = 4 * defaultSizeOfStartBox.first;
+    
+    this->widthSpace = 4 * defaultSizeOfStartBox.first;
 }

@@ -6,8 +6,9 @@
 int main()
 {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Enthropy");
-    sf::View view(sf::FloatRect(0,0,500, 500));
+    sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
+    sf::View view(sf::FloatRect(0,0,1000, 1000));
+    view.setViewport(sf::FloatRect(0 ,0 , 2.0f/3, 1));
 
     Enthropy enthropy;
     Simulation sim(window, enthropy, view);

@@ -1,5 +1,4 @@
 #include "simulation.hpp"
-#include <iostream>
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
@@ -17,11 +16,26 @@ void Simulation::drawBox(){
     };
 
     this->window->draw(lineStrip, 5, sf::LineStrip);
+
+    if(this->enthropy->getState() == false){
+
+        sf::Vertex startBox[5] ={
+            sf::Vertex(sf::Vector2f(rim , rim)),
+            sf::Vertex(sf::Vector2f(rim, defaultSizeOfStartBox.second + rim)),
+            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first + rim, defaultSizeOfStartBox.second + rim)),
+            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first + rim, rim)),
+            sf::Vertex(sf::Vector2f(rim, rim))
+        };
+
+        this->window->draw(startBox, 5, sf::LineStrip);
+    }
 }
 
 void Simulation::drawParticles(bool parallel){
 
-    sf::CircleShape circle(radiusOfParticle);
+    sf::CircleShape circle(this->enthropy->getRadiusOfParticle());
+
+    circle.setOrigin(sf::Vector2f(this->enthropy->getRadiusOfParticle(), this->enthropy->getRadiusOfParticle()));
     circle.setFillColor(sf::Color::Red);
     int j = 0;
     if(!parallel){

@@ -19,7 +19,6 @@ class Simulation : public Renderer{
         Simulation(sf::RenderWindow & win, Enthropy & ent, sf::View & view) : Renderer{win}{
             this->enthropy = &ent;
             this->simView = view;
-            //this->enthropy->setStartPos();
         }
         void showView() override;
         void drawBox();
