@@ -52,6 +52,7 @@ class Enthropy{
         void borderBounce(bool parallel = false);
         float getRadiusOfParticle(){ return this->radiusOfParticle;}
         bool getState(){ return this->start; }
+
         float calcEnthropy();
 
 };

@@ -1,5 +1,6 @@
 #include "renderer.hpp"
 #include "simulation.hpp"
+#include "plot.hpp"
 #include "enthropy.hpp"
 #include <iostream>
 
@@ -16,7 +17,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
 
     Simulation sim(window);
-
+    Plot plot(window, sim);
 
     while (sim.getWindow()->isOpen())
     {
@@ -56,6 +57,8 @@ int main()
 
         sim.loopSimulation(1.0f / 30);
         sim.showView();
+
+        plot.showView();
         // end the current frame
         sim.getWindow()->display();
         window.setFramerateLimit(60);
