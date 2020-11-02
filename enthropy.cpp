@@ -35,19 +35,17 @@ void Enthropy::setDirOfParticles(bool parallel){
             auto ind = i + 1;
             while(ind != this->gas.end() && ind->getPosition().x - i->getPosition().x <= 2*radiusOfParticle + epsilon){
 
-                _vector speedBetween = ind->getSpeed() + _vector::negation(i->getSpeed());
-                
-                float a = _vector::dotProduct(speedBetween, i->getSpeed());
-                float b = _vector::dotProduct(_vector::negation(speedBetween), i->getSpeed());
-
                 _vector positionBetween = i->getPosition() + _vector::negation(ind->getPosition());
 
-                if(a >= -epsilon && b >= -epsilon){
-                    ind ++;
-                    continue;
-                }
+                float a = _vector::dotProduct(positionBetween, ind->getSpeed());
+                float b = _vector::dotProduct(_vector::negation(positionBetween), i->getSpeed());
+
 
                 if(_vector::length(positionBetween) < 2 * radiusOfParticle + epsilon){
+                    if(a <= 0 && b <= 0){
+                        ind ++;
+                        continue;
+                    }
                     crash(i, ind);
                 }
                 ind++;

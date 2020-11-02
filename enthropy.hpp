@@ -28,7 +28,7 @@ class Enthropy{
         void setStartSpeed();
 
     public:
-        Enthropy(){//reallyyyy ugly
+        Enthropy(){
             this->nOfParticles = defaultNumParticles;
             start = false;
             setUpParameters();

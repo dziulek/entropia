@@ -6,33 +6,47 @@
 
 
 void Simulation::drawBox(){
-    sf::Vector2f viewSize = this->simView.getSize();
+    sf::Vector2f viewSize = this->simView->getSize();
 
-    sf::Vector2f center = this->simView.getCenter();
+    sf::Vector2f center = this->simView->getCenter();
 
     sf::Vector2f leftUp = {center.x - viewSize.x/2, center.y - viewSize.y/2};
 
+
     sf::Vertex lineStrip[5] ={
-        sf::Vertex(sf::Vector2f(leftUp.x + rim, leftUp.y + rim)),
-        sf::Vertex(sf::Vector2f(leftUp.x + rim, viewSize.y - rim + leftUp.y)),
-        sf::Vertex(sf::Vector2f(viewSize.x - rim + leftUp.x, viewSize.y - rim + leftUp.y)),
-        sf::Vertex(sf::Vector2f(viewSize.x - rim + leftUp.x, rim + leftUp.y)),
-        sf::Vertex(sf::Vector2f(rim + leftUp.x, rim + leftUp.y))
+        sf::Vertex(sf::Vector2f(0, 0)),
+        sf::Vertex(sf::Vector2f(0, defaultSizeOfStartBox.second * 4 )),
+        sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first * 4 , defaultSizeOfStartBox.second * 4)),
+        sf::Vertex(sf::Vector2f( defaultSizeOfStartBox.first * 4, 0)),
+        sf::Vertex(sf::Vector2f(0, 0))
     };
+
+    sf::RectangleShape bigSquare = sf::RectangleShape(sf::Vector2f(4 * defaultSizeOfStartBox.first, 4 * defaultSizeOfStartBox.second));
+
+    bigSquare.setFillColor(sf::Color(sf::Color(150, 200, 100, 255)));
+
+    this->window->draw(bigSquare);
 
     this->window->draw(lineStrip, 5, sf::LineStrip);
 
     if(this->enthropy->getState() == false){
 
         sf::Vertex startBox[5] ={
-            sf::Vertex(sf::Vector2f(rim , rim)),
-            sf::Vertex(sf::Vector2f(rim, defaultSizeOfStartBox.second + rim)),
-            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first + rim, defaultSizeOfStartBox.second + rim)),
-            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first + rim, rim)),
-            sf::Vertex(sf::Vector2f(rim, rim))
+            sf::Vertex(sf::Vector2f(0 , 0)),
+            sf::Vertex(sf::Vector2f(0, defaultSizeOfStartBox.second)),
+            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second)),
+            sf::Vertex(sf::Vector2f(defaultSizeOfStartBox.first, 0)),
+            sf::Vertex(sf::Vector2f(0, 0))
         };
 
+
+
         this->window->draw(startBox, 5, sf::LineStrip);
+
+        sf::RectangleShape squareXd = sf::RectangleShape(sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second));
+        
+        squareXd.setFillColor(sf::Color(100, 100, 100, 255));
+        this->window->draw(squareXd);
     }
 }
 
@@ -41,7 +55,7 @@ void Simulation::drawParticles(bool parallel){
     sf::CircleShape circle(this->enthropy->getRadiusOfParticle());
 
     circle.setOrigin(sf::Vector2f(this->enthropy->getRadiusOfParticle(), this->enthropy->getRadiusOfParticle()));
-    circle.setFillColor(sf::Color::White);
+    circle.setFillColor(sf::Color(102, 51, 204, 255));
     int j = 0;
     if(!parallel){
         for(auto i : this->enthropy->getParticles()){
@@ -57,7 +71,7 @@ void Simulation::drawParticles(bool parallel){
 
 void Simulation::showView(){
 
-    this->window->setView(this->simView);
+    this->window->setView(*this->simView);
 
     this->drawBox();
     drawParticles(false);
@@ -68,30 +82,36 @@ void Simulation::keyCallback(sf::Event event){
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
 
-                this->simView.zoom(1.1);
-                std::cout<<this->simView.getSize().x<<" "<< this->simView.getSize().y<<std::endl;
+                if(this->simView->getSize().x < 5 * defaultSizeOfStartBox.first)
+                    this->simView->zoom(1.1);
+                //std::cout<<this->simView->getSize().x<<" "<< this->simView->getSize().y<<std::endl;
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
                 
-                //this->simView.move(sf::Vector2f(-0.1 * this->simView.getSize().x, -0.1 * this->simView.getSize().y));
-                this->simView.zoom(0.9);
+                if(this->simView->getSize().x > 2 * this->enthropy->getRadiusOfParticle())
+                this->simView->zoom(0.9);
                 
-                std::cout<<this->simView.getSize().x<<" "<< this->simView.getSize().y<<std::endl;
+                //std::cout<<this->simView->getSize().x<<" "<< this->simView->getSize().y<<std::endl;
 
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
 
-                this->simView.move(sf::Vector2f(0,-10));
+                if(this->simView->getCenter().x > 0)
+                    this->simView->move(sf::Vector2f(0,-10));
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
 
-                this->simView.move(sf::Vector2f(0,10));
+                if(this->simView->getCenter().x < defaultSizeOfStartBox.first * 4)
+                    this->simView->move(sf::Vector2f(0,10));
            }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                this->simView.move(sf::Vector2f(10,0));
+
+                if(this->simView->getCenter().y > 0)
+                    this->simView->move(sf::Vector2f(10,0));
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 
-                this->simView.move(sf::Vector2f(-10,0));
+                if(this->simView->getCenter().y < defaultSizeOfStartBox.second * 4)
+                    this->simView->move(sf::Vector2f(-10,0));
             }
 }
