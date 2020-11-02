@@ -1,5 +1,5 @@
-#ifndef SYMULATION_HPP
-#define SYMULATION_HPP
+#ifndef SIMULATION_HPP
+#define SIMULATION_HPP
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
@@ -24,6 +24,7 @@ class Simulation : public Renderer{
         void drawBox();
         void drawParticles(bool parallel = false);
         void startSimulation(){ this->enthropy->releaseParticles(); }
+        void keyCallback(sf::Event event) override;
 };
 
 #endif

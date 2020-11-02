@@ -3,6 +3,13 @@
 #include "enthropy.hpp"
 #include <iostream>
 
+#define SIMULATION 0
+#define PLOT 1
+#define STATS 2
+
+int currentWindow = SIMULATION;
+
+
 int main()
 {
     // create the window
@@ -13,7 +20,6 @@ int main()
     Enthropy enthropy;
     Simulation sim(window, enthropy, view);
 
-    sim.startSimulation();
 
     while (sim.getWindow()->isOpen())
     {
@@ -22,6 +28,31 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+                //switch between windows: simulation -> plot -> stats -> ...
+                currentWindow = ( currentWindow + 1 ) % 3;
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)){
+
+                sim.startSimulation();
+            }
+
+            switch (currentWindow)
+            {
+            case SIMULATION:
+                sim.keyCallback(event);
+
+                break;
+            case PLOT:
+                sim.keyCallback(event);
+
+            case STATS:
+                sim.keyCallback(event);
+
+            default:
+                break;
+            }
         }
 
         enthropy.loop(1.0f/30);

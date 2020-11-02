@@ -1,4 +1,5 @@
 #include "simulation.hpp"
+#include "renderer.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
@@ -7,12 +8,16 @@
 void Simulation::drawBox(){
     sf::Vector2f viewSize = this->simView.getSize();
 
+    sf::Vector2f center = this->simView.getCenter();
+
+    sf::Vector2f leftUp = {center.x - viewSize.x/2, center.y - viewSize.y/2};
+
     sf::Vertex lineStrip[5] ={
-        sf::Vertex(sf::Vector2f(rim, rim)),
-        sf::Vertex(sf::Vector2f(rim, viewSize.y - rim)),
-        sf::Vertex(sf::Vector2f(viewSize.x - rim, viewSize.y - rim)),
-        sf::Vertex(sf::Vector2f(viewSize.x - rim, rim)),
-        sf::Vertex(sf::Vector2f(rim, rim))
+        sf::Vertex(sf::Vector2f(leftUp.x + rim, leftUp.y + rim)),
+        sf::Vertex(sf::Vector2f(leftUp.x + rim, viewSize.y - rim + leftUp.y)),
+        sf::Vertex(sf::Vector2f(viewSize.x - rim + leftUp.x, viewSize.y - rim + leftUp.y)),
+        sf::Vertex(sf::Vector2f(viewSize.x - rim + leftUp.x, rim + leftUp.y)),
+        sf::Vertex(sf::Vector2f(rim + leftUp.x, rim + leftUp.y))
     };
 
     this->window->draw(lineStrip, 5, sf::LineStrip);
@@ -57,4 +62,36 @@ void Simulation::showView(){
     this->drawBox();
     drawParticles(false);
 
+}
+
+void Simulation::keyCallback(sf::Event event){
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+
+                this->simView.zoom(1.1);
+                std::cout<<this->simView.getSize().x<<" "<< this->simView.getSize().y<<std::endl;
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+                
+                //this->simView.move(sf::Vector2f(-0.1 * this->simView.getSize().x, -0.1 * this->simView.getSize().y));
+                this->simView.zoom(0.9);
+                
+                std::cout<<this->simView.getSize().x<<" "<< this->simView.getSize().y<<std::endl;
+
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+
+                this->simView.move(sf::Vector2f(0,-10));
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+
+                this->simView.move(sf::Vector2f(0,10));
+           }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+                this->simView.move(sf::Vector2f(10,0));
+            }
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+
+                this->simView.move(sf::Vector2f(-10,0));
+            }
 }

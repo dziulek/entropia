@@ -4,7 +4,7 @@
 #include <utility>
 
 const float epsilon = 0.1;
-const float defaultNumParticles = 10000;
+const float defaultNumParticles = 100;
 const float defaultWidth = 200;
 const float defaultHeight = 200;
 const std::pair<float, float> defaultCorner = {10.0f, 10.0f};
