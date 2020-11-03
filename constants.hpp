@@ -17,6 +17,6 @@ const float rim = 10.0f;
 const float avspeed = 40.0f;
 
 //plot
-const float plotRim = 20.0f;
+const float plotRim = 50.0f;
 
 #endif
