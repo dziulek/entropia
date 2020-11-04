@@ -173,8 +173,8 @@ float Enthropy::calcEnthropy(){
 
     for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
 
-        int x = floor(i->getPosition().x / (this->widthSpace / nOfIntervals));
-        int y = floor(i->getPosition().y / (this->heightSpace / nOfIntervals));
+        int x = floor(i->getPosition().x / (1200.0f / nOfIntervals));
+        int y = floor(i->getPosition().y / (1200.0f / nOfIntervals));
         int vx = floor(i->getSpeed().x / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
         int vy = floor(i->getSpeed().y / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
 

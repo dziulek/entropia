@@ -40,6 +40,7 @@ class Enthropy{
             setUpParameters();
             setStartPos();
             setStartSpeed();
+            enthropyValue = calcEnthropy();
         }
         Enthropy(unsigned int nofparticles){
             this->nOfParticles = nofparticles;
@@ -47,6 +48,7 @@ class Enthropy{
             setUpParameters();
             setStartPos();
             setStartSpeed();
+            enthropyValue = calcEnthropy();
         }
         std::vector<Particle> & getParticles();
         void releaseParticles();

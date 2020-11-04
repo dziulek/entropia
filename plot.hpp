@@ -17,6 +17,11 @@ class Plot : public Renderer{
         sf::View* plotView;
         std::vector<float> xlabels;
         std::vector<float> ylabels;
+        std::vector<sf::Vertex> data;
+        float yOffset = 0;
+        sf::Vector2f zeroZero;
+
+        void transformCoordToView();
 
     public:
         Plot(sf::RenderWindow &win, Simulation &sim) : Renderer(win){
@@ -24,7 +29,16 @@ class Plot : public Renderer{
             this->simulation = &sim;
             this->plotView = new sf::View;
 
-            plotView->setViewport(sf::FloatRect(2.0f / 3 ,0 , 1.0f/3, 0.5));
+            //this->plotView->setSize(sf::Vector2f(300.0f, 300.0f));
+
+            this->plotView->setViewport(sf::FloatRect(2.0f / 3 ,0 , 1.0f/3, 0.5));
+
+            this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
+
+            data.clear();
+            data.push_back(sf::Vertex(zeroZero));
+
+            this->yOffset = this->simulation->getEnthropy();
         }
         ~Plot(){
 
@@ -33,9 +47,9 @@ class Plot : public Renderer{
         void showView() override;
         void drawTicksAndAxis();
         void calculateTicks();
-        void scalePlot();
+        void scalePlot(std::vector<sf::Vertex> & dataCopy, float xFactor, float yFactor);
         void keyCallback();
-        void drawPlot();
+        void drawPlot(float deltaTime);
 
         
 };

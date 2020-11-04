@@ -15,7 +15,8 @@ int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
-
+    
+    
     Simulation sim(window);
     Plot plot(window, sim);
 
@@ -57,9 +58,10 @@ int main()
 
         sim.loopSimulation(1.0f / 30);
 
-        std::cout<<sim.getEnthropy()<<std::endl;
+        //std::cout<<sim.getEnthropy()<<std::endl;
         sim.showView();
 
+        plot.drawPlot(1.0f / 30);
         plot.showView();
         // end the current frame
         sim.getWindow()->display();

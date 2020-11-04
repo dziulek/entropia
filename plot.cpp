@@ -49,8 +49,46 @@ void Plot::calculateTicks(){
 
 }
 
-void Plot::drawPlot(){
+void Plot::transformCoordToView(){
 
+    std::vector<sf::Vertex>::iterator i;
+    for(i = this->data.begin(); i != this->data.end(); i++){
+
+        *i = sf::Vertex(sf::Vector2f(i->position.x + zeroZero.x, -i->position.y + yOffset + zeroZero.y ));        
+    }
+}
+
+void Plot::drawPlot(float deltaTime){
+
+    if(this->data.size() > 1000){
+
+        int currIndex = 1;
+        for(auto i = 1; i < this->data.size(); i+=4){
+
+            this->data[currIndex] = this->data[i];
+            currIndex ++;
+        }
+        this->data.resize(currIndex);
+        this->data.shrink_to_fit();
+    }
+    
+    sf::Vertex newVertex = sf::Vertex(sf::Vector2f(this->data.back().position.x + deltaTime + this->zeroZero.x, 
+                            this->zeroZero.y -this->simulation->getEnthropy() + this->yOffset));
+    this->data.push_back(newVertex);
+std::cout<<this->data.back().position.x<<" "<<this->data.back().position.y<<" "<<this->yOffset<<std::endl;
+    std::vector<sf::Vertex> dataCopy;
+    dataCopy.resize(this->data.size());
+    
+    for(int i = 0; i < dataCopy.size(); i++) dataCopy[i] = this->data[i];
+
+    this->scalePlot(dataCopy, xEndCoord / this->data.back().position.x, yEndCoord / this->data.back().position.y);
+
+    this->window->setView(*this->plotView);
+
+
+    this->window->draw(&dataCopy[0], dataCopy.size(), sf::TriangleFan);
+
+    //this->data.pop_back();
 }
 
 void Plot::keyCallback(){
@@ -58,9 +96,14 @@ void Plot::keyCallback(){
 
 }
 
-void Plot::scalePlot(){
+void Plot::scalePlot(std::vector<sf::Vertex> & dataCopy,float xFactor, float yFactor){
 
+    std::vector<sf::Vertex>::iterator i;
+    for(i = dataCopy.begin(); i != dataCopy.end(); i++){
 
+        i->position.x = (i->position.x - this->zeroZero.x) * xFactor + this->zeroZero.x;
+        i->position.y = (i->position.y - this->zeroZero.y) * yFactor + this->zeroZero.y;
+    }
 }
 
 void Plot::showView(){
@@ -70,6 +113,5 @@ void Plot::showView(){
     calculateTicks();
 
     drawTicksAndAxis();
-    drawPlot();
 
 }
