@@ -111,6 +111,8 @@ void Enthropy::loop(const float deltaTime){
     setDirOfParticles(false);
     moveParticles(deltaTime);
 
+    zeroCurState();
+    this->enthropyValue = calcEnthropy();
 }
 
 std::vector<Particle> & Enthropy::getParticles(){
@@ -165,4 +167,40 @@ void Enthropy::releaseParticles(){
     this->heightSpace = 4 * defaultSizeOfStartBox.first;
     
     this->widthSpace = 4 * defaultSizeOfStartBox.first;
+}
+
+float Enthropy::calcEnthropy(){
+
+    for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
+
+        int x = floor(i->getPosition().x / (this->widthSpace / nOfIntervals));
+        int y = floor(i->getPosition().y / (this->heightSpace / nOfIntervals));
+        int vx = floor(i->getSpeed().x / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
+        int vy = floor(i->getSpeed().y / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
+
+        this->curState[abs(x)][abs(y)][abs(vx)][abs(vy)]++;
+    }
+
+    float score=this->nOfParticles*log(this->nOfParticles) - this->nOfParticles, f;
+    for(int i=0;i<nOfIntervals;i++){
+        for(int j=0;j< nOfIntervals;j++){
+            for(int k=0;k< nOfIntervals;k++){
+                for(int h=0;h< nOfIntervals;h++){
+                        f=this->curState[i][j][k][h];
+                        if(f!=0)
+                    score+=(-f*log(f)+f);
+                }
+            }
+        }
+    }
+    return score;
+}
+
+void Enthropy::zeroCurState(){
+
+    for(int i = 0; i < nOfIntervals; i++)
+        for(int j = 0; j < nOfIntervals; j++)
+            for(int k = 0; k < nOfIntervals; k++)
+                for(int l = 0; l < nOfIntervals; l++)
+                    this->curState[i][j][k][l] = 0;
 }

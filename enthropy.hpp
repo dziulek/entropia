@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <utility>
 #include <iostream>
+#include <cmath>
 #include "particle.hpp"
 #include "_vector.hpp"
 
@@ -22,10 +23,15 @@ class Enthropy{
         bool start = false;
         std::pair<float, float> leftUpCorner;//y, x!
         std::pair<float, float> rightDownCornerStartBox;
+        int curState[nOfIntervals][nOfIntervals][nOfIntervals][nOfIntervals];
+
+        float enthropyValue;
+
         void setUpParameters();
         static void crash(VPI a, VPI b);
         void setStartPos();
         void setStartSpeed();
+        void zeroCurState();
 
     public:
         Enthropy(){
@@ -51,7 +57,8 @@ class Enthropy{
         void loop(const float deltaTime);
         void borderBounce(bool parallel = false);
         float getRadiusOfParticle(){ return this->radiusOfParticle;}
-        bool getState(){ return this->start; }
+        bool getState(){ return this->start; };
+        float getEnthropyValue(){ return this->enthropyValue; }
 
         float calcEnthropy();
 

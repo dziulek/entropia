@@ -35,7 +35,6 @@ class Plot : public Renderer{
         void calculateTicks();
         void scalePlot();
         void keyCallback();
-        float getEnthropy();
         void drawPlot();
 
         

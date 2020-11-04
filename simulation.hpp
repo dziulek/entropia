@@ -36,6 +36,7 @@ class Simulation : public Renderer{
         void releaseParticles(){ this->enthropy->releaseParticles(); }
         void loopSimulation(const float deltaTime){ this->enthropy->loop(deltaTime); }
         void keyCallback(sf::Event event) override;
+        float getEnthropy(){ return this->enthropy->getEnthropyValue(); }
 };
 
 #endif

@@ -56,6 +56,8 @@ int main()
         sim.getWindow()->clear(sf::Color(255, 153, 153, 255));
 
         sim.loopSimulation(1.0f / 30);
+
+        std::cout<<sim.getEnthropy()<<std::endl;
         sim.showView();
 
         plot.showView();
