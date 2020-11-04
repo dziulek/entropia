@@ -60,35 +60,43 @@ void Plot::transformCoordToView(){
 
 void Plot::drawPlot(float deltaTime){
 
-    if(this->data.size() > 1000){
+    if(this->startPlotting == 1){
+        if(this->data.size() > 1000){
 
-        int currIndex = 1;
-        for(auto i = 1; i < this->data.size(); i+=4){
+            int currIndex = 1;
+            for(auto i = 1; i < this->data.size(); i+=4){
 
-            this->data[currIndex] = this->data[i];
-            currIndex ++;
+                this->data[currIndex] = this->data[i];
+                currIndex ++;
+            }
+            this->data.resize(currIndex);
+            this->data.shrink_to_fit();
         }
-        this->data.resize(currIndex);
-        this->data.shrink_to_fit();
+        
+        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(this->data.back().position.x + deltaTime, 
+                                                    this->simulation->getEnthropy() - this->yOffset));
+        this->data.push_back(newVertex);
+
+        //this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, 0)));
+    
+        std::vector<sf::Vertex> dataCopy;
+        dataCopy.resize(this->data.size());
+        
+        for(int i = 0; i < dataCopy.size(); i++) dataCopy[i] = this->data[i];
+
+        this->scalePlot(dataCopy, xEndCoord / this->data.back().position.x,
+                                yEndCoord / this->data.back().position.y);
+
+    //////////////
+    //////////////  
+
+        this->window->setView(*this->plotView);
+
+
+        this->window->draw(&dataCopy[0], dataCopy.size(), sf::LineStrip);
+
+        //this->data.pop_back();        
     }
-    
-    sf::Vertex newVertex = sf::Vertex(sf::Vector2f(this->data.back().position.x + deltaTime + this->zeroZero.x, 
-                            this->zeroZero.y -this->simulation->getEnthropy() + this->yOffset));
-    this->data.push_back(newVertex);
-std::cout<<this->data.back().position.x<<" "<<this->data.back().position.y<<" "<<this->yOffset<<std::endl;
-    std::vector<sf::Vertex> dataCopy;
-    dataCopy.resize(this->data.size());
-    
-    for(int i = 0; i < dataCopy.size(); i++) dataCopy[i] = this->data[i];
-
-    this->scalePlot(dataCopy, xEndCoord / this->data.back().position.x, yEndCoord / this->data.back().position.y);
-
-    this->window->setView(*this->plotView);
-
-
-    this->window->draw(&dataCopy[0], dataCopy.size(), sf::TriangleFan);
-
-    //this->data.pop_back();
 }
 
 void Plot::keyCallback(){
@@ -101,8 +109,8 @@ void Plot::scalePlot(std::vector<sf::Vertex> & dataCopy,float xFactor, float yFa
     std::vector<sf::Vertex>::iterator i;
     for(i = dataCopy.begin(); i != dataCopy.end(); i++){
 
-        i->position.x = (i->position.x - this->zeroZero.x) * xFactor + this->zeroZero.x;
-        i->position.y = (i->position.y - this->zeroZero.y) * yFactor + this->zeroZero.y;
+        i->position.x = i->position.x * xFactor + this->zeroZero.x;
+        i->position.y = -i->position.y * yFactor + this->zeroZero.y;
     }
 }
 

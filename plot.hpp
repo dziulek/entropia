@@ -21,6 +21,8 @@ class Plot : public Renderer{
         float yOffset = 0;
         sf::Vector2f zeroZero;
 
+        bool startPlotting = 0;
+
         void transformCoordToView();
 
     public:
@@ -36,7 +38,7 @@ class Plot : public Renderer{
             this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
 
             data.clear();
-            data.push_back(sf::Vertex(zeroZero));
+            data.push_back(sf::Vertex(sf::Vector2f(0, 0)));
 
             this->yOffset = this->simulation->getEnthropy();
         }
@@ -50,6 +52,7 @@ class Plot : public Renderer{
         void scalePlot(std::vector<sf::Vertex> & dataCopy, float xFactor, float yFactor);
         void keyCallback();
         void drawPlot(float deltaTime);
+        void start(){ this->startPlotting = 1; }
 
         
 };

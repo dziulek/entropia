@@ -35,6 +35,7 @@ int main()
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)){
 
                 sim.releaseParticles();
+                plot.start();
             }
 
             switch (currentWindow)

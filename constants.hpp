@@ -21,6 +21,8 @@ const float avspeed = 40.0f;
 //plot
 const float plotRim = 50.0f;
 
-const float xEndCoord = 250.0f;
-const float yEndCoord = 100.0f;
+const float xEndCoord = 700.0f;
+const float yEndCoord = 700.0f;
+
+const int maxVertex = 1010;
 #endif
