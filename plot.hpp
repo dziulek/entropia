@@ -26,8 +26,12 @@ class Plot : public Renderer{
         float maxHeightPlot;
         float maxWidthPlot;
 
+        sf::Vertex* globalMax;
+        sf::Vertex* globalMin;
+
         void transformCoordToViewCoord();
         void transformViewCoordToCoord(); //inverse transformaton
+        void movePlotAlongYAxis(float yVec);
 
     public:
         Plot(sf::RenderWindow &win, Enthropy &ent, sf::View &view) : Renderer(win){
@@ -38,7 +42,11 @@ class Plot : public Renderer{
             this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
 
             data.clear();
-            data.push_back(sf::Vertex(sf::Vector2f(0.0f, 0.0f)));
+            data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->enthropy->getEnthropyValue())));
+
+            this->globalMax = &data.back();
+            this->globalMin = &data.back();
+            std::cout<<globalMin->position.y<<std::endl;
 
             xAxisUnit = 0.25;// one quarter of a second
 
@@ -46,7 +54,7 @@ class Plot : public Renderer{
 
             maxHeightPlot = this->plotView->getSize().y - 2 * plotRim;
             maxWidthPlot = this->plotView->getSize().x - 2 * plotRim;
-            std::cout<<maxHeightPlot<<" " <<maxWidthPlot<<std::endl;
+
         }
         ~Plot(){
             std::cout<<"plot destructor called"<<std::endl;

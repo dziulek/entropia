@@ -60,7 +60,7 @@ void Plot::transformCoordToViewCoord(){
         tempy = i->position.y;
 
         tempx += zeroZero.x;
-        tempy = -i->position.y;
+        tempy = -tempy;
         tempy += zeroZero.y;
 
         *i = sf::Vertex(sf::Vector2f(tempx, tempy));        
@@ -76,10 +76,19 @@ void Plot::transformViewCoordToCoord(){
     for(i = this->data.begin(); i != this->data.end(); i++){
 
         tempx = i->position.x - zeroZero.x;
-        tempy = i->position.x - zeroZero.y;
+        tempy = i->position.y - zeroZero.y;
         tempy = -tempy;
 
         *i = sf::Vertex(sf::Vector2f(tempx, tempy));
+    }
+}
+
+void Plot::movePlotAlongYAxis(float yVec){
+
+    std::vector<sf::Vertex>::iterator i;
+    for(i = this->data.begin(); i != this->data.end(); i++){
+
+        i->position.y += yVec;
     }
 }
 
@@ -89,28 +98,50 @@ void Plot::drawPlot(){
 
     if(this->enthropy->getState() == 1 && time - this->data.back().position.x >= this->xAxisUnit){
 
-        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue() - this->yOffset));
+        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue()));
         this->data.push_back(newVertex);
 
-        this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, 0)));
+        if(this->data.back().position.y > this->globalMax->position.y) globalMax = &data.back();
+
+        if(this->data.back().position.y < this->globalMin->position.y) globalMin = &data.back();
+
+        this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, data[0].position.y)));
 
         if(this->data.back().position.x > maxWidthPlot){
 
-            for(int i = 1; i < data.size() / 2; i++)   
+            for(int i = 1; i < data.size() / 2; i++){
+               
                 data[i] = data[ i * 2 ];
+
+                if(data[i].position.y > this->globalMax->position.y)
+                    globalMax = &data[i];
+                
+                if(data[i].position.y < this->globalMin->position.y)
+                    globalMin = &data[i];               
+            }
+                
 
             this->data.resize(data.size() / 2);
             this->data.shrink_to_fit();
         }
         
+        std::cout<<"przed: "<<data.back().position.y<<" "<<this->globalMin->position.y<<std::endl;
+        movePlotAlongYAxis(-globalMin->position.y);
+        std::cout<<"po: "<<data.back().position.y<<std::endl;
+
+        float diff = globalMax->position.y - globalMin->position.y;
+
         //scale coordinates
-        float xf = this->maxHeightPlot / this->data.back().position.x;
-        float yf = this->maxWidthPlot / this->data.back().position.y;
+        float xf, yf;
+
+        if(abs(this->data.back().position.x) <= ep) xf = 1;
+        else xf = this->maxWidthPlot / data.back().position.x;
+
+        if(abs(diff) <= ep) yf = 1;
+        else yf = this->maxHeightPlot / diff;
 
         this->scalePlot(xf, yf);
         
-                std::cout<<this->data.back().position.x<<" "<<this->data.back().position.y<<" "<<this->enthropy->getEnthropyValue()<<std::endl;
-
         //transform coordinates
         this->transformCoordToViewCoord();
 
@@ -125,7 +156,9 @@ void Plot::drawPlot(){
         this->transformViewCoordToCoord();
 
         //undo scale
-        this->scalePlot(1 / xf, 1 / yf);       
+        this->scalePlot(1 / xf, 1 / yf);  
+
+        movePlotAlongYAxis(globalMin->position.y);     
     }
 }
 
@@ -140,7 +173,7 @@ void Plot::scalePlot(float xFactor, float yFactor){
     for(i = data.begin(); i != data.end(); i++){
 
         i->position.x = i->position.x * xFactor;
-        i->position.y = -i->position.y * yFactor;
+        i->position.y = i->position.y * yFactor;
     }
 }
 

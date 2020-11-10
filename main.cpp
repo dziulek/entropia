@@ -80,6 +80,5 @@ int main()
         window.display();
         window.setFramerateLimit(60);
     }
-
     return 0;
 }

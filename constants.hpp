@@ -3,7 +3,8 @@
 
 #include <utility>
 
-const float epsilon = 0.1;
+const float epsilon = 0.1;//for crashes
+const float ep = 0.0000001;
 const float defaultNumParticles = 1000;
 const float defaultWidth = 200;
 const float defaultHeight = 200;
