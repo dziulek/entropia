@@ -80,6 +80,8 @@ void Enthropy::setUpParameters(){
                                         leftUpCorner.second + defaultSizeOfStartBox.second};
     this->averageSpeed = avspeed;
     this->gas.resize((int)inRow * (int)inRow);
+
+    this->entTime = 0;
 }
 
 void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
@@ -107,6 +109,9 @@ void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
 }
 
 void Enthropy::loop(const float deltaTime){
+
+    if(this->start == true)
+        this->entTime += deltaTime;
     
     setDirOfParticles(false);
     moveParticles(deltaTime);
@@ -171,6 +176,8 @@ void Enthropy::releaseParticles(){
 
 float Enthropy::calcEnthropy(){
 
+    zeroCurState();
+
     for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
 
         int x = floor(i->getPosition().x / (1200.0f / nOfIntervals));
@@ -182,13 +189,14 @@ float Enthropy::calcEnthropy(){
     }
 
     float score=this->nOfParticles*log(this->nOfParticles) - this->nOfParticles, f;
+
     for(int i=0;i<nOfIntervals;i++){
         for(int j=0;j< nOfIntervals;j++){
             for(int k=0;k< nOfIntervals;k++){
                 for(int h=0;h< nOfIntervals;h++){
-                        f=this->curState[i][j][k][h];
-                        if(f!=0)
-                    score+=(-f*log(f)+f);
+                    f=this->curState[i][j][k][h];
+                    if(f>0)
+                        score+=(-f*log(f)+f);
                 }
             }
         }

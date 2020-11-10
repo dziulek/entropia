@@ -83,11 +83,13 @@ void Plot::transformViewCoordToCoord(){
     }
 }
 
-void Plot::drawPlot(float time){
+void Plot::drawPlot(){
+
+    float time = this->enthropy->getTime();
 
     if(this->enthropy->getState() == 1 && time - this->data.back().position.x >= this->xAxisUnit){
 
-        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue() - yOffset));
+        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue() - this->yOffset));
         this->data.push_back(newVertex);
 
         this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, 0)));
@@ -102,9 +104,13 @@ void Plot::drawPlot(float time){
         }
         
         //scale coordinates
-        this->scalePlot(this->maxHeightPlot / this->data.back().position.x,
-                                this->maxWidthPlot / this->data.back().position.y);
+        float xf = this->maxHeightPlot / this->data.back().position.x;
+        float yf = this->maxWidthPlot / this->data.back().position.y;
+
+        this->scalePlot(xf, yf);
         
+                std::cout<<this->data.back().position.x<<" "<<this->data.back().position.y<<" "<<this->enthropy->getEnthropyValue()<<std::endl;
+
         //transform coordinates
         this->transformCoordToViewCoord();
 
@@ -119,8 +125,7 @@ void Plot::drawPlot(float time){
         this->transformViewCoordToCoord();
 
         //undo scale
-        this->scalePlot(this->data.back().position.x / this->maxHeightPlot,
-                                this->data.back().position.y / this->maxWidthPlot);       
+        this->scalePlot(1 / xf, 1 / yf);       
     }
 }
 
@@ -141,10 +146,19 @@ void Plot::scalePlot(float xFactor, float yFactor){
 
 void Plot::showView(){
 
+
     this->window->setView(*this->plotView);
     
     calculateTicks();
 
     drawTicksAndAxis();
-    
+
+    drawPlot();
+
+    //sf::RectangleShape r = sf::RectangleShape(sf::Vector2f(1500.0f, 400.0f));
+
+    //r.setFillColor(sf::Color::Black);
+
+    //this->window->draw(r);
+    ///std::cout<<r.getPosition().x << " " << r.getPosition().y << std::endl;    
 }

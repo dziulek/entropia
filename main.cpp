@@ -21,9 +21,9 @@ int main()
                             sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second) * 2.0f);
     simulationView.setViewport(sf::FloatRect(0 ,0 , 2.0f/3, 1));
 
-    sf::View plotView(sf::Vector2f(defaultSizeOfPlotView, defaultSizeOfPlotView), 
-                      sf::Vector2f(defaultSizeOfPlotView / 2, defaultSizeOfPlotView / 2));
-    plotView.setViewport(sf::FloatRect(2.0 / 3, 0, 1.0 / 3, 1.0 / 2));
+    sf::View plotView;//(sf::Vector2f(defaultSizeOfPlotView, defaultSizeOfPlotView), 
+                      //sf::Vector2f(defaultSizeOfPlotView / 2, defaultSizeOfPlotView / 2));
+    plotView.setViewport(sf::FloatRect(2.0f/3, 0, 1.0f/3, 1.0f/2));
 
 
     Enthropy entropy;
@@ -32,10 +32,10 @@ int main()
 
     float time = 0; // temporary for plot
 
-    while (sim.getWindow()->isOpen())
+    while (window.isOpen())
     {
         sf::Event event;
-        while (sim.getWindow()->pollEvent(event))
+        while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
@@ -46,7 +46,7 @@ int main()
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)){
 
-                sim.releaseParticles();
+                entropy.releaseParticles();
             }
 
             switch (currentWindow)
@@ -56,17 +56,17 @@ int main()
 
                 break;
             case PLOT:
-                sim.keyCallback(event);
+                //plot.keyCallback(event);
 
             case STATS:
-                sim.keyCallback(event);
+                //stats.keyCallback(event);
 
             default:
                 break;
             }
         }
 
-        sim.getWindow()->clear(sf::Color(255, 153, 153, 255));
+        window.clear(sf::Color(255, 153, 153, 255));
 
         sim.loopSimulation(1.0f / 30);
 
@@ -75,10 +75,9 @@ int main()
         time += 1.0f / 30;
         
         plot.showView();
-        plot.drawPlot(time);
 
         // end the current frame
-        sim.getWindow()->display();
+        window.display();
         window.setFramerateLimit(60);
     }
 

@@ -19,7 +19,7 @@ class Plot : public Renderer{
         std::vector<float> xlabels;
         std::vector<float> ylabels;
         std::vector<sf::Vertex> data;
-        float yOffset = 0;
+        float yOffset;
         sf::Vector2f zeroZero;
         float xAxisUnit;
 
@@ -38,12 +38,15 @@ class Plot : public Renderer{
             this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
 
             data.clear();
-            data.push_back(sf::Vertex(sf::Vector2f(0, 0)));
+            data.push_back(sf::Vertex(sf::Vector2f(0.0f, 0.0f)));
 
             xAxisUnit = 0.25;// one quarter of a second
 
+            this->yOffset = this->enthropy->getEnthropyValue();
+
             maxHeightPlot = this->plotView->getSize().y - 2 * plotRim;
             maxWidthPlot = this->plotView->getSize().x - 2 * plotRim;
+            std::cout<<maxHeightPlot<<" " <<maxWidthPlot<<std::endl;
         }
         ~Plot(){
             std::cout<<"plot destructor called"<<std::endl;
@@ -53,7 +56,7 @@ class Plot : public Renderer{
         void calculateTicks();
         void scalePlot(float xFactor, float yFactor);
         void keyCallback();
-        void drawPlot(float deltaTime);
+        void drawPlot();
         
 };
 

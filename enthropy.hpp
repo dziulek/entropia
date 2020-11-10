@@ -26,6 +26,7 @@ class Enthropy{
         int curState[nOfIntervals][nOfIntervals][nOfIntervals][nOfIntervals];
 
         float enthropyValue;
+        float entTime; // for simulations
 
         void setUpParameters();
         static void crash(VPI a, VPI b);
@@ -49,6 +50,7 @@ class Enthropy{
             setStartPos();
             setStartSpeed();
             enthropyValue = calcEnthropy();
+            
         }
         ~Enthropy(){
             std::cout<<"entropy destructor called"<<std::endl;
@@ -64,6 +66,7 @@ class Enthropy{
         float getRadiusOfParticle(){ return this->radiusOfParticle;}
         bool getState(){ return this->start; };
         float getEnthropyValue(){ return this->enthropyValue; }
+        float getTime(){ return this->entTime; }
 
         float calcEnthropy();
 
