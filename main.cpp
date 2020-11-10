@@ -15,10 +15,22 @@ int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
-    
-    
-    Simulation sim(window);
-    Plot plot(window, sim);
+
+    //views
+    sf::View simulationView(sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second) * 4.0f, 
+                            sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second) * 2.0f);
+    simulationView.setViewport(sf::FloatRect(0 ,0 , 2.0f/3, 1));
+
+    sf::View plotView(sf::Vector2f(defaultSizeOfPlotView, defaultSizeOfPlotView), 
+                      sf::Vector2f(defaultSizeOfPlotView / 2, defaultSizeOfPlotView / 2));
+    plotView.setViewport(sf::FloatRect(2.0 / 3, 0, 1.0 / 3, 1.0 / 2));
+
+
+    Enthropy entropy;
+    Simulation sim(window, entropy, simulationView);
+    Plot plot(window, entropy, plotView);
+
+    float time = 0; // temporary for plot
 
     while (sim.getWindow()->isOpen())
     {
@@ -35,7 +47,6 @@ int main()
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)){
 
                 sim.releaseParticles();
-                plot.start();
             }
 
             switch (currentWindow)
@@ -59,11 +70,13 @@ int main()
 
         sim.loopSimulation(1.0f / 30);
 
-        //std::cout<<sim.getEnthropy()<<std::endl;
         sim.showView();
 
-        plot.drawPlot(1.0f / 30);
+        time += 1.0f / 30;
+        
         plot.showView();
+        plot.drawPlot(time);
+
         // end the current frame
         sim.getWindow()->display();
         window.setFramerateLimit(60);

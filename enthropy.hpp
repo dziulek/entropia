@@ -50,6 +50,9 @@ class Enthropy{
             setStartSpeed();
             enthropyValue = calcEnthropy();
         }
+        ~Enthropy(){
+            std::cout<<"entropy destructor called"<<std::endl;
+        }
         std::vector<Particle> & getParticles();
         void releaseParticles();
         void sortParticlesX(VPI b, VPI e);

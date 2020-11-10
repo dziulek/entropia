@@ -49,53 +49,78 @@ void Plot::calculateTicks(){
 
 }
 
-void Plot::transformCoordToView(){
+void Plot::transformCoordToViewCoord(){
+
+    float tempx, tempy;
 
     std::vector<sf::Vertex>::iterator i;
     for(i = this->data.begin(); i != this->data.end(); i++){
 
-        *i = sf::Vertex(sf::Vector2f(i->position.x + zeroZero.x, -i->position.y + yOffset + zeroZero.y ));        
+        tempx = i->position.x;
+        tempy = i->position.y;
+
+        tempx += zeroZero.x;
+        tempy = -i->position.y;
+        tempy += zeroZero.y;
+
+        *i = sf::Vertex(sf::Vector2f(tempx, tempy));        
     }
 }
 
-void Plot::drawPlot(float deltaTime){
+void Plot::transformViewCoordToCoord(){
 
-    if(this->startPlotting == 1){
-        if(this->data.size() > 1000){
+    float tempx;
+    float tempy;
 
-            int currIndex = 1;
-            for(auto i = 1; i < this->data.size(); i+=4){
+    std::vector<sf::Vertex>::iterator i;
+    for(i = this->data.begin(); i != this->data.end(); i++){
 
-                this->data[currIndex] = this->data[i];
-                currIndex ++;
-            }
-            this->data.resize(currIndex);
+        tempx = i->position.x - zeroZero.x;
+        tempy = i->position.x - zeroZero.y;
+        tempy = -tempy;
+
+        *i = sf::Vertex(sf::Vector2f(tempx, tempy));
+    }
+}
+
+void Plot::drawPlot(float time){
+
+    if(this->enthropy->getState() == 1 && time - this->data.back().position.x >= this->xAxisUnit){
+
+        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue() - yOffset));
+        this->data.push_back(newVertex);
+
+        this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, 0)));
+
+        if(this->data.back().position.x > maxWidthPlot){
+
+            for(int i = 1; i < data.size() / 2; i++)   
+                data[i] = data[ i * 2 ];
+
+            this->data.resize(data.size() / 2);
             this->data.shrink_to_fit();
         }
         
-        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(this->data.back().position.x + deltaTime, 
-                                                    this->simulation->getEnthropy() - this->yOffset));
-        this->data.push_back(newVertex);
-
-        //this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, 0)));
-    
-        std::vector<sf::Vertex> dataCopy;
-        dataCopy.resize(this->data.size());
+        //scale coordinates
+        this->scalePlot(this->maxHeightPlot / this->data.back().position.x,
+                                this->maxWidthPlot / this->data.back().position.y);
         
-        for(int i = 0; i < dataCopy.size(); i++) dataCopy[i] = this->data[i];
-
-        this->scalePlot(dataCopy, xEndCoord / this->data.back().position.x,
-                                yEndCoord / this->data.back().position.y);
+        //transform coordinates
+        this->transformCoordToViewCoord();
 
     //////////////
     //////////////  
 
         this->window->setView(*this->plotView);
 
+        this->window->draw(&data[0], data.size(), sf::TriangleStrip);
 
-        this->window->draw(&dataCopy[0], dataCopy.size(), sf::LineStrip);
+        //undo transform coordinates
+        this->transformViewCoordToCoord();
 
-        //this->data.pop_back();        
+        //undo scale
+        this->scalePlot(this->data.back().position.x / this->maxHeightPlot,
+                                this->data.back().position.y / this->maxWidthPlot);       
     }
 }
 
@@ -104,13 +129,13 @@ void Plot::keyCallback(){
 
 }
 
-void Plot::scalePlot(std::vector<sf::Vertex> & dataCopy,float xFactor, float yFactor){
+void Plot::scalePlot(float xFactor, float yFactor){
 
     std::vector<sf::Vertex>::iterator i;
-    for(i = dataCopy.begin(); i != dataCopy.end(); i++){
+    for(i = data.begin(); i != data.end(); i++){
 
-        i->position.x = i->position.x * xFactor + this->zeroZero.x;
-        i->position.y = -i->position.y * yFactor + this->zeroZero.y;
+        i->position.x = i->position.x * xFactor;
+        i->position.y = -i->position.y * yFactor;
     }
 }
 
@@ -121,5 +146,5 @@ void Plot::showView(){
     calculateTicks();
 
     drawTicksAndAxis();
-
+    
 }

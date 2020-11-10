@@ -16,19 +16,16 @@ class Simulation : public Renderer{
     
     public:
 
-        Simulation(sf::RenderWindow & win) : Renderer{win}{
-            this->enthropy = new Enthropy;
-            this->simView = new sf::View;
+        Simulation(sf::RenderWindow & win, Enthropy & ent, sf::View &simulationView) : Renderer{win}{
+            this->enthropy = &ent;
+            this->simView = &simulationView;
 
             simView->setSize(sf::Vector2f(4 * defaultSizeOfStartBox.first, 4 * defaultSizeOfStartBox.second));
             
             simView->setCenter(sf::Vector2f(2 * defaultSizeOfStartBox.first, 2 * defaultSizeOfStartBox.second));
-
-            simView->setViewport(sf::FloatRect(0 ,0 , 2.0f/3, 1));
         }
         ~Simulation(){
-            delete enthropy;
-            delete simView;
+            std::cout<<"simulation destructor called"<<std::endl;
         }
         void showView() override;
         void drawBox();
