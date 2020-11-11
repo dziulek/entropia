@@ -69,6 +69,7 @@ class Enthropy{
         float getTime(){ return this->entTime; }
 
         float calcEnthropy();
+        auto getCurState(){ return curState; }
 
 };
 

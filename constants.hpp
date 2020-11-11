@@ -25,4 +25,11 @@ const float plotRim = 50.0f;
 const float defaultSizeOfPlotView = 1000.0f;
 
 const int maxVertex = 1010;
+
+//stats
+const float statsRim = 50.0f;
+
+
+
+
 #endif

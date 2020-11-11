@@ -2,6 +2,7 @@
 #include "simulation.hpp"
 #include "plot.hpp"
 #include "enthropy.hpp"
+#include "stats.hpp"
 #include <iostream>
 
 #define SIMULATION 0
@@ -25,10 +26,14 @@ int main()
                       //sf::Vector2f(defaultSizeOfPlotView / 2, defaultSizeOfPlotView / 2));
     plotView.setViewport(sf::FloatRect(2.0f/3, 0, 1.0f/3, 1.0f/2));
 
+    sf::View statsView;
+
+    statsView.setViewport(sf::FloatRect(2.0f/3, 1.0f/2, 1.0f/3, 1.0f/2));
 
     Enthropy entropy;
     Simulation sim(window, entropy, simulationView);
-    Plot plot(window, entropy, plotView);
+    //Plot plot(window, entropy, plotView);
+    Stats stats(window, entropy, statsView);
 
     float time = 0; // temporary for plot
 
@@ -73,7 +78,9 @@ int main()
 
         time += 1.0f / 30;
         
-        plot.showView();
+        //plot.showView();
+
+        stats.showView();
 
         // end the current frame
         window.display();

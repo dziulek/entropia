@@ -124,8 +124,6 @@ void Plot::drawPlot(){
             this->data.resize(data.size() / 2);
             this->data.shrink_to_fit();
         }
-
-        std::cout<<data.size()<<std::endl;
         
         movePlotAlongYAxis(-globalMin);
 
@@ -184,12 +182,5 @@ void Plot::showView(){
 
     drawTicksAndAxis();
 
-    drawPlot();
-
-    //sf::RectangleShape r = sf::RectangleShape(sf::Vector2f(1500.0f, 400.0f));
-
-    //r.setFillColor(sf::Color::Black);
-
-    //this->window->draw(r);
-    ///std::cout<<r.getPosition().x << " " << r.getPosition().y << std::endl;    
+    drawPlot();  
 }
