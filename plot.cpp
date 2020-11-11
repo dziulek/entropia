@@ -101,35 +101,35 @@ void Plot::drawPlot(){
         sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue()));
         this->data.push_back(newVertex);
 
-        if(this->data.back().position.y > this->globalMax->position.y) globalMax = &data.back();
+        if(this->data.back().position.y > this->globalMax) globalMax = this->data.back().position.y;
 
-        if(this->data.back().position.y < this->globalMin->position.y) globalMin = &data.back();
+        if(this->data.back().position.y < this->globalMin) globalMin = data.back().position.y;
 
-        this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, data[0].position.y)));
+        //this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, data[0].position.y)));
 
-        if(this->data.back().position.x > maxWidthPlot){
+        if(this->data.size() > 400){
 
             for(int i = 1; i < data.size() / 2; i++){
                
                 data[i] = data[ i * 2 ];
 
-                if(data[i].position.y > this->globalMax->position.y)
-                    globalMax = &data[i];
+                if(data[i].position.y > this->globalMax)
+                    globalMax = data[i].position.y;
                 
-                if(data[i].position.y < this->globalMin->position.y)
-                    globalMin = &data[i];               
+                if(data[i].position.y < this->globalMin)
+                    globalMin = data[i].position.y;               
             }
                 
 
             this->data.resize(data.size() / 2);
             this->data.shrink_to_fit();
         }
-        
-        std::cout<<"przed: "<<data.back().position.y<<" "<<this->globalMin->position.y<<std::endl;
-        movePlotAlongYAxis(-globalMin->position.y);
-        std::cout<<"po: "<<data.back().position.y<<std::endl;
 
-        float diff = globalMax->position.y - globalMin->position.y;
+        std::cout<<data.size()<<std::endl;
+        
+        movePlotAlongYAxis(-globalMin);
+
+        float diff = globalMax - globalMin;
 
         //scale coordinates
         float xf, yf;
@@ -148,9 +148,7 @@ void Plot::drawPlot(){
     //////////////
     //////////////  
 
-        this->window->setView(*this->plotView);
-
-        this->window->draw(&data[0], data.size(), sf::TriangleStrip);
+        this->window->draw(&data[0], data.size(), sf::LineStrip);
 
         //undo transform coordinates
         this->transformViewCoordToCoord();
@@ -158,7 +156,7 @@ void Plot::drawPlot(){
         //undo scale
         this->scalePlot(1 / xf, 1 / yf);  
 
-        movePlotAlongYAxis(globalMin->position.y);     
+        movePlotAlongYAxis(globalMin);     
     }
 }
 

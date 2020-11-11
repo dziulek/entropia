@@ -65,11 +65,10 @@ int main()
                 break;
             }
         }
-
-        window.clear(sf::Color(255, 153, 153, 255));
-
         sim.loopSimulation(1.0f / 30);
 
+        window.clear(sf::Color(255, 153, 153, 255));    
+        
         sim.showView();
 
         time += 1.0f / 30;

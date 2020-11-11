@@ -26,8 +26,8 @@ class Plot : public Renderer{
         float maxHeightPlot;
         float maxWidthPlot;
 
-        sf::Vertex* globalMax;
-        sf::Vertex* globalMin;
+        float globalMax;
+        float globalMin;
 
         void transformCoordToViewCoord();
         void transformViewCoordToCoord(); //inverse transformaton
@@ -44,13 +44,10 @@ class Plot : public Renderer{
             data.clear();
             data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->enthropy->getEnthropyValue())));
 
-            this->globalMax = &data.back();
-            this->globalMin = &data.back();
-            std::cout<<globalMin->position.y<<std::endl;
+            this->globalMax = data.back().position.y;
+            this->globalMin = data.back().position.y;
 
-            xAxisUnit = 0.25;// one quarter of a second
-
-            this->yOffset = this->enthropy->getEnthropyValue();
+            xAxisUnit = 4;// one quarter of a second
 
             maxHeightPlot = this->plotView->getSize().y - 2 * plotRim;
             maxWidthPlot = this->plotView->getSize().x - 2 * plotRim;
