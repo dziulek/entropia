@@ -4,20 +4,20 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
-#include "enthropy.hpp"
+#include "entropy.hpp"
 #include "renderer.hpp"
 
 class Simulation : public Renderer{
 
     private:
 
-        Enthropy* enthropy;
+        Entropy* entropy;
         sf::View* simView;
     
     public:
 
-        Simulation(sf::RenderWindow & win, Enthropy & ent, sf::View &simulationView) : Renderer{win}{
-            this->enthropy = &ent;
+        Simulation(sf::RenderWindow & win, Entropy & ent, sf::View &simulationView) : Renderer{win}{
+            this->entropy = &ent;
             this->simView = &simulationView;
 
             simView->setSize(sf::Vector2f(4 * defaultSizeOfStartBox.first, 4 * defaultSizeOfStartBox.second));
@@ -30,10 +30,10 @@ class Simulation : public Renderer{
         void showView() override;
         void drawBox();
         void drawParticles(bool parallel = false);
-        void releaseParticles(){ this->enthropy->releaseParticles(); }
-        void loopSimulation(const float deltaTime){ this->enthropy->loop(deltaTime); }
+        void releaseParticles(){ this->entropy->releaseParticles(); }
+        void loopSimulation(const float deltaTime){ this->entropy->loop(deltaTime); }
         void keyCallback(sf::Event event) override;
-        float getEnthropy(){ return this->enthropy->getEnthropyValue(); }
+        float getEntropy(){ return this->entropy->getEntropyValue(); }
 };
 
 #endif

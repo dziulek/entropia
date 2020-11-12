@@ -1,7 +1,7 @@
 #include "renderer.hpp"
 #include "simulation.hpp"
 #include "plot.hpp"
-#include "enthropy.hpp"
+#include "entropy.hpp"
 #include "stats.hpp"
 #include <iostream>
 
@@ -15,7 +15,7 @@ int currentWindow = SIMULATION;
 int main()
 {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(900, 600), "Enthropy");
+    sf::RenderWindow window(sf::VideoMode(900, 600), "Entropy");
 
     //views
     sf::View simulationView(sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second) * 4.0f, 
@@ -30,7 +30,7 @@ int main()
 
     statsView.setViewport(sf::FloatRect(2.0f/3, 1.0f/2, 1.0f/3, 1.0f/2));
 
-    Enthropy entropy;
+    Entropy entropy;
     Simulation sim(window, entropy, simulationView);
     //Plot plot(window, entropy, plotView);
     Stats stats(window, entropy, statsView);

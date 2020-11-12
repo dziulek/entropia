@@ -1,7 +1,7 @@
 #ifndef STATS_HPP
 #define STATS_HPP
 
-#include "enthropy.hpp"
+#include "entropy.hpp"
 #include "renderer.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
@@ -12,7 +12,7 @@ class Stats : public Renderer{
 
 private:
 
-    Enthropy* enthropy;
+    Entropy* entropy;
     sf::View* statsView;
 
     float lowThresholdDensity;
@@ -22,13 +22,13 @@ private:
 
 public:
 
-    Stats(sf::RenderWindow & win, Enthropy & ent, sf::View & view) : Renderer{win} {
+    Stats(sf::RenderWindow & win, Entropy & ent, sf::View & view) : Renderer{win} {
 
-        this->enthropy = &ent;
+        this->entropy = &ent;
         this->statsView = &view;
 
-        this->lowThresholdDensity = float(enthropy->getParticles().size()) / float(numberOfFields * numberOfFields * 4);
-        this->highThresholdDensity = float(enthropy->getParticles().size()) / float(numberOfFields * numberOfFields);
+        this->lowThresholdDensity = float(entropy->getParticles().size()) / float(numberOfFields * numberOfFields * 4);
+        this->highThresholdDensity = float(entropy->getParticles().size() * 2) / float(numberOfFields * numberOfFields);
 
     }
     void showView() override;

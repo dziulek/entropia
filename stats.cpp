@@ -8,7 +8,7 @@ void Stats::drawDensitySquares(){
 
     sf::RectangleShape square = sf::RectangleShape(sf::Vector2f(xsquare, ysquare));
 
-    auto ptr = this->enthropy->getCurState();
+    auto ptr = this->entropy->getCurState();
 
     for(int i = 0; i<numberOfFields; i++){
 

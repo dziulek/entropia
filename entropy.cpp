@@ -1,17 +1,17 @@
-#include "enthropy.hpp"
+#include "entropy.hpp"
 #include <iostream>
 
 typedef std::vector<Particle>::iterator VPI;
 
-void Enthropy::sortParticlesX(VPI b, VPI e){
+void Entropy::sortParticlesX(VPI b, VPI e){
     std::sort(b, e, [](Particle &s, Particle &t){return s.getPosition().x < t.getPosition().x;});
 }
 
-void Enthropy::sortParticlesY(VPI b, VPI e){
+void Entropy::sortParticlesY(VPI b, VPI e){
     std::sort(b, e, [](Particle &s, Particle &t){return s.getPosition().y < t.getPosition().y;});
 }
 
-void Enthropy::setDirOfParticles(bool parallel){
+void Entropy::setDirOfParticles(bool parallel){
     if(!parallel){
         this->sortParticlesX(this->gas.begin(), this->gas.end());
 
@@ -57,7 +57,7 @@ void Enthropy::setDirOfParticles(bool parallel){
     }
 }
 
-void Enthropy::moveParticles(const float deltaTime){
+void Entropy::moveParticles(const float deltaTime){
 
     for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
 
@@ -66,7 +66,7 @@ void Enthropy::moveParticles(const float deltaTime){
     }
 }
 
-void Enthropy::setUpParameters(){
+void Entropy::setUpParameters(){
     
     float inRow = (int)ceil(sqrt(float(nOfParticles)));
 
@@ -84,7 +84,7 @@ void Enthropy::setUpParameters(){
     this->entTime = 0;
 }
 
-void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
+void Entropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
 
     _vector crashAxis = b->getPosition() + _vector::negation(a->getPosition());
     _vector vaPerp, vbPerp, vaPar, vbPar;
@@ -108,7 +108,7 @@ void Enthropy::crash(VPI a, VPI b){//particle "a" has smaller x corrdinate
     b->setSpeed(vaPar + vbPerp);
 }
 
-void Enthropy::loop(const float deltaTime){
+void Entropy::loop(const float deltaTime){
 
     if(this->start == true)
         this->entTime += deltaTime;
@@ -117,14 +117,14 @@ void Enthropy::loop(const float deltaTime){
     moveParticles(deltaTime);
 
     zeroCurState();
-    this->enthropyValue = calcEnthropy();
+    this->entropyValue = calcEntropy();
 }
 
-std::vector<Particle> & Enthropy::getParticles(){
+std::vector<Particle> & Entropy::getParticles(){
     return this->gas;
 }
 
-void Enthropy::setStartPos(){
+void Entropy::setStartPos(){
 
     srand(time(NULL));
 
@@ -149,7 +149,7 @@ void Enthropy::setStartPos(){
     }
 }
 
-void Enthropy::setStartSpeed(){
+void Entropy::setStartSpeed(){
     
     std::srand(time(NULL));
     
@@ -165,7 +165,7 @@ void Enthropy::setStartSpeed(){
     }
 }
 
-void Enthropy::releaseParticles(){
+void Entropy::releaseParticles(){
     
     this->start = 1;
 
@@ -174,18 +174,23 @@ void Enthropy::releaseParticles(){
     this->widthSpace = 4 * defaultSizeOfStartBox.first;
 }
 
-float Enthropy::calcEnthropy(){
+float Entropy::calcEntropy(){
 
     zeroCurState();
 
     for(VPI i = this->gas.begin(); i != this->gas.end(); i++){
 
-        int x = floor(i->getPosition().x / (1200.0f / nOfIntervals));
-        int y = floor(i->getPosition().y / (1200.0f / nOfIntervals));
-        int vx = floor(i->getSpeed().x / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
-        int vy = floor(i->getSpeed().y / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals));
+        int x = abs(floor(i->getPosition().x / (1200.0f / nOfIntervals)));
+        int y = abs(floor(i->getPosition().y / (1200.0f / nOfIntervals)));
+        int vx = abs(floor(i->getSpeed().x / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals)));
+        int vy = abs(floor(i->getSpeed().y / (2 * sqrt(2.0f) * averageSpeed / nOfIntervals)));
 
-        this->curState[abs(x)][abs(y)][abs(vx)][abs(vy)]++;
+        x = (x >= nOfIntervals ? nOfIntervals-1 : x); 
+        y = (y >= nOfIntervals ? nOfIntervals-1 : y);
+        vx = (vx >= nOfIntervals ? nOfIntervals-1 : vx);
+        vy = (vy >= nOfIntervals ? nOfIntervals-1 : vy);
+
+        this->curState[x][y][vx][vy]++;
     }
 
     float score=this->nOfParticles*log(this->nOfParticles) - this->nOfParticles, f;
@@ -204,7 +209,7 @@ float Enthropy::calcEnthropy(){
     return score;
 }
 
-void Enthropy::zeroCurState(){
+void Entropy::zeroCurState(){
 
     for(int i = 0; i < nOfIntervals; i++)
         for(int j = 0; j < nOfIntervals; j++)

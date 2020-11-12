@@ -1,4 +1,4 @@
-project(Enthropy)
+project(Entropy)
 
 cmake_minimum_required(VERSION 3.13)
 

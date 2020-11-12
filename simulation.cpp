@@ -29,7 +29,7 @@ void Simulation::drawBox(){
 
     this->window->draw(lineStrip, 5, sf::LineStrip);
 
-    if(this->enthropy->getState() == false){
+    if(this->entropy->getState() == false){
 
         sf::Vertex startBox[5] ={
             sf::Vertex(sf::Vector2f(0 , 0)),
@@ -52,14 +52,20 @@ void Simulation::drawBox(){
 
 void Simulation::drawParticles(bool parallel){
 
-    sf::CircleShape circle(this->enthropy->getRadiusOfParticle());
+    sf::CircleShape circle(this->entropy->getRadiusOfParticle());
 
-    circle.setOrigin(sf::Vector2f(this->enthropy->getRadiusOfParticle(), this->enthropy->getRadiusOfParticle()));
+    circle.setOrigin(sf::Vector2f(this->entropy->getRadiusOfParticle(), this->entropy->getRadiusOfParticle()));
     circle.setFillColor(sf::Color(102, 51, 204, 255));
     int j = 0;
-    if(!parallel){
-        for(auto i : this->enthropy->getParticles()){
 
+    //drawing parcticles only visible on the screen
+
+    //sf::Vector2f viewSize = this->simView->getSize();
+    //sf::Vector2f leftup = this->simView->getCenter() - viewSize * 0.5f;
+
+    if(!parallel){
+        for(auto i : this->entropy->getParticles()){
+            
             circle.setPosition(i.getPosition().x, i.getPosition().y);
             window->draw(circle);
         }
@@ -88,7 +94,7 @@ void Simulation::keyCallback(sf::Event event){
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
                 
-                if(this->simView->getSize().x > 2 * this->enthropy->getRadiusOfParticle())
+                if(this->simView->getSize().x > 2 * this->entropy->getRadiusOfParticle())
                 this->simView->zoom(0.9);
                 
                 //std::cout<<this->simView->getSize().x<<" "<< this->simView->getSize().y<<std::endl;

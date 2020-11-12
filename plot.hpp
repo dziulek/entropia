@@ -1,7 +1,7 @@
 #ifndef PLOT_HPP
 #define PLOT_HPP
 
-#include "enthropy.hpp"
+#include "entropy.hpp"
 #include "renderer.hpp"
 #include "simulation.hpp"
 #include "constants.hpp"
@@ -14,7 +14,7 @@
 class Plot : public Renderer{
 
     private:
-        Enthropy* enthropy;
+        Entropy* entropy;
         sf::View* plotView;
         std::vector<float> xlabels;
         std::vector<float> ylabels;
@@ -34,15 +34,15 @@ class Plot : public Renderer{
         void movePlotAlongYAxis(float yVec);
 
     public:
-        Plot(sf::RenderWindow &win, Enthropy &ent, sf::View &view) : Renderer(win){
+        Plot(sf::RenderWindow &win, Entropy &ent, sf::View &view) : Renderer(win){
             
-            this->enthropy = &ent;
+            this->entropy = &ent;
             this->plotView = &view;
 
             this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
 
             data.clear();
-            data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->enthropy->getEnthropyValue())));
+            data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->entropy->getEntropyValue())));
 
             this->globalMax = data.back().position.y;
             this->globalMin = data.back().position.y;

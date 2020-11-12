@@ -12,7 +12,7 @@
 
 typedef std::vector<Particle>::iterator VPI;
 
-class Enthropy{
+class Entropy{
     private:
         unsigned int nOfParticles;
         std::vector<Particle> gas;
@@ -25,7 +25,7 @@ class Enthropy{
         std::pair<float, float> rightDownCornerStartBox;
         int curState[nOfIntervals][nOfIntervals][nOfIntervals][nOfIntervals];
 
-        float enthropyValue;
+        float entropyValue;
         float entTime; // for simulations
 
         void setUpParameters();
@@ -35,24 +35,24 @@ class Enthropy{
         void zeroCurState();
 
     public:
-        Enthropy(){
+        Entropy(){
             this->nOfParticles = defaultNumParticles;
             start = false;
             setUpParameters();
             setStartPos();
             setStartSpeed();
-            enthropyValue = calcEnthropy();
+            entropyValue = calcEntropy();
         }
-        Enthropy(unsigned int nofparticles){
+        Entropy(unsigned int nofparticles){
             this->nOfParticles = nofparticles;
             start = false;
             setUpParameters();
             setStartPos();
             setStartSpeed();
-            enthropyValue = calcEnthropy();
+            entropyValue = calcEntropy();
             
         }
-        ~Enthropy(){
+        ~Entropy(){
             std::cout<<"entropy destructor called"<<std::endl;
         }
         std::vector<Particle> & getParticles();
@@ -65,10 +65,10 @@ class Enthropy{
         void borderBounce(bool parallel = false);
         float getRadiusOfParticle(){ return this->radiusOfParticle;}
         bool getState(){ return this->start; };
-        float getEnthropyValue(){ return this->enthropyValue; }
+        float getEntropyValue(){ return this->entropyValue; }
         float getTime(){ return this->entTime; }
 
-        float calcEnthropy();
+        float calcEntropy();
         auto getCurState(){ return curState; }
 
 };

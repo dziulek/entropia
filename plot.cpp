@@ -94,11 +94,11 @@ void Plot::movePlotAlongYAxis(float yVec){
 
 void Plot::drawPlot(){
 
-    float time = this->enthropy->getTime();
+    float time = this->entropy->getTime();
 
-    if(this->enthropy->getState() == 1 && time - this->data.back().position.x >= this->xAxisUnit){
+    if(this->entropy->getState() == 1 && time - this->data.back().position.x >= this->xAxisUnit){
 
-        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->enthropy->getEnthropyValue()));
+        sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->entropy->getEntropyValue()));
         this->data.push_back(newVertex);
 
         if(this->data.back().position.y > this->globalMax) globalMax = this->data.back().position.y;
