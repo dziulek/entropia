@@ -32,7 +32,7 @@ int main()
 
     Entropy entropy;
     Simulation sim(window, entropy, simulationView);
-    //Plot plot(window, entropy, plotView);
+    Plot plot(window, entropy, plotView);
     Stats stats(window, entropy, statsView);
 
     float time = 0; // temporary for plot
@@ -72,13 +72,13 @@ int main()
         }
         sim.loopSimulation(1.0f / 30);
 
-        window.clear(sf::Color(255, 153, 153, 255));    
+        window.clear(backSimColor);    
         
         sim.showView();
 
         time += 1.0f / 30;
         
-        //plot.showView();
+        plot.showView();
 
         stats.showView();
 

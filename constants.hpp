@@ -2,6 +2,9 @@
 #define CONSTANTS_HPP
 
 #include <utility>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 const float epsilon = 0.1;//for crashes
 const float ep = 0.0000001;
@@ -29,7 +32,22 @@ const int maxVertex = 1010;
 //stats
 const float statsRim = 50.0f;
 
+//colors
+//a) simulation
 
+const sf::Color particleColor = sf::Color(255, 255, 255, 255);
+const sf::Color spaceColor = sf::Color(122, 157, 255, 255);
+const sf::Color startBoxColor = sf::Color(122, 77, 255, 255);
+const sf::Color backSimColor = sf::Color(120, 127, 99, 255);
+
+//b) plot
+const sf::Color  axisColor = sf::Color(255, 255, 255, 255);
+const sf::Color plotColor = sf::Color(65, 255, 255, 255);
+const sf::Color backPlotColor = sf::Color(160, 154, 118, 255);
+
+//c) stats
+
+const sf::Color backStatsColor = sf::Color(177, 180, 167, 255);
 
 
 #endif

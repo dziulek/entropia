@@ -23,7 +23,7 @@ void Simulation::drawBox(){
 
     sf::RectangleShape bigSquare = sf::RectangleShape(sf::Vector2f(4 * defaultSizeOfStartBox.first, 4 * defaultSizeOfStartBox.second));
 
-    bigSquare.setFillColor(sf::Color(sf::Color(150, 200, 100, 255)));
+    bigSquare.setFillColor(startBoxColor);
 
     this->window->draw(bigSquare);
 
@@ -45,7 +45,7 @@ void Simulation::drawBox(){
 
         sf::RectangleShape squareXd = sf::RectangleShape(sf::Vector2f(defaultSizeOfStartBox.first, defaultSizeOfStartBox.second));
         
-        squareXd.setFillColor(sf::Color(100, 100, 100, 255));
+        squareXd.setFillColor(spaceColor);
         this->window->draw(squareXd);
     }
 }
@@ -55,7 +55,7 @@ void Simulation::drawParticles(bool parallel){
     sf::CircleShape circle(this->entropy->getRadiusOfParticle());
 
     circle.setOrigin(sf::Vector2f(this->entropy->getRadiusOfParticle(), this->entropy->getRadiusOfParticle()));
-    circle.setFillColor(sf::Color(102, 51, 204, 255));
+    circle.setFillColor(particleColor);
     int j = 0;
 
     //drawing parcticles only visible on the screen

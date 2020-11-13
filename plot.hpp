@@ -43,11 +43,12 @@ class Plot : public Renderer{
 
             data.clear();
             data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->entropy->getEntropyValue())));
+            data[data.size() - 1].color = plotColor;
 
             this->globalMax = data.back().position.y;
             this->globalMin = data.back().position.y;
 
-            xAxisUnit = 4;// one quarter of a second
+            xAxisUnit = 0.25;// one quarter of a second
 
             maxHeightPlot = this->plotView->getSize().y - 2 * plotRim;
             maxWidthPlot = this->plotView->getSize().x - 2 * plotRim;

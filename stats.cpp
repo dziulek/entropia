@@ -33,7 +33,7 @@ void Stats::drawDensitySquares(){
             if(intcol < 127)
                 square.setFillColor(sf::Color(intcol * 2,  255, 0, 255));
             else 
-                square.setFillColor(sf::Color(255, intcol%127 * 2, 0, 255));
+                square.setFillColor(sf::Color(255, 255 - (intcol-128) * 2, 0, 255));
 
             square.setPosition(sf::Vector2f(statsRim + xsquare * float(i), statsRim + ysquare * float(j)));
 
@@ -46,11 +46,12 @@ void Stats::showView(){
 
     this->window->setView(*this->statsView);
 
-    drawDensitySquares();
+    sf::RectangleShape statsBackground = sf::RectangleShape(sf::Vector2f(this->statsView->getSize().x,
+                                                                        this->statsView->getSize().y));
 
-    //sf::RectangleShape r = sf::RectangleShape(sf::Vector2f(500.0f, 500.0f));
+    this->window->draw(statsBackground);
 
-    //this->window->draw(r);
+     drawDensitySquares();
 }
 
 void Stats::keyCallback(sf::Event event){

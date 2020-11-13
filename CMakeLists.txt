@@ -11,4 +11,4 @@ message("${HEADERS}")
 
 add_executable("${PROJECT_NAME}" ${SOURCE} ${HEADERS})
 
-target_link_libraries(Enthropy -lsfml-graphics -lsfml-window -lsfml-system)
+target_link_libraries(Entropy -lsfml-graphics -lsfml-window -lsfml-system)
