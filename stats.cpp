@@ -48,6 +48,7 @@ void Stats::showView(){
 
     sf::RectangleShape statsBackground = sf::RectangleShape(sf::Vector2f(this->statsView->getSize().x,
                                                                         this->statsView->getSize().y));
+    statsBackground.setFillColor(backStatsColor);
 
     this->window->draw(statsBackground);
 
@@ -55,5 +56,15 @@ void Stats::showView(){
 }
 
 void Stats::keyCallback(sf::Event event){
+    
+    if(event.type == sf::Event::Resized){
 
+        sf::Vector2f center = this->statsView->getCenter();
+
+        float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+
+        this->statsView->setSize(sf::Vector2f(this->statsView->getSize().x, this->statsView->getSize().x * newRatio));
+        this->statsView->setCenter(sf::Vector2f(center));
+
+    }
 }

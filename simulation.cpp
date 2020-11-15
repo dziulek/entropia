@@ -120,4 +120,14 @@ void Simulation::keyCallback(sf::Event event){
                 if(this->simView->getCenter().y < defaultSizeOfStartBox.second * 4)
                     this->simView->move(sf::Vector2f(-10,0));
             }
+            else if(event.type == sf::Event::Resized){
+
+                sf::Vector2f center = this->simView->getCenter();
+
+                float newRatio = event.size.height / (2.0f / 3 * event.size.width);
+
+                this->simView->setSize(sf::Vector2f(this->simView->getSize().x, this->simView->getSize().x * newRatio));
+                this->simView->setCenter(sf::Vector2f(center));
+
+            }
 }

@@ -53,17 +53,16 @@ void Plot::transformCoordToViewCoord(){
 
     float tempx, tempy;
 
-    std::vector<sf::Vertex>::iterator i;
-    for(i = this->data.begin(); i != this->data.end(); i++){
+    for(int i = 0; i < this->data.getVertexCount(); i++){
 
-        tempx = i->position.x;
-        tempy = i->position.y;
+        tempx = data[i].position.x;
+        tempy = data[i].position.y;
 
         tempx += zeroZero.x;
         tempy = -tempy;
         tempy += zeroZero.y;
 
-        *i = sf::Vertex(sf::Vector2f(tempx, tempy));        
+        data[i] = sf::Vertex(sf::Vector2f(tempx, tempy));        
     }
 }
 
@@ -72,23 +71,21 @@ void Plot::transformViewCoordToCoord(){
     float tempx;
     float tempy;
 
-    std::vector<sf::Vertex>::iterator i;
-    for(i = this->data.begin(); i != this->data.end(); i++){
+    for(int i = 0; i < data.getVertexCount(); i++){
 
-        tempx = i->position.x - zeroZero.x;
-        tempy = i->position.y - zeroZero.y;
+        tempx = data[i].position.x - zeroZero.x;
+        tempy = data[i].position.y - zeroZero.y;
         tempy = -tempy;
 
-        *i = sf::Vertex(sf::Vector2f(tempx, tempy));
+        data[i] = sf::Vertex(sf::Vector2f(tempx, tempy));
     }
 }
 
 void Plot::movePlotAlongYAxis(float yVec){
 
-    std::vector<sf::Vertex>::iterator i;
-    for(i = this->data.begin(); i != this->data.end(); i++){
+    for(int i =0; i < data.getVertexCount(); i++){
 
-        i->position.y += yVec;
+        data[i].position.y += yVec;
     }
 }
 
@@ -97,20 +94,20 @@ void Plot::drawPlot(){
     float time = this->entropy->getTime();
 
     if(this->entropy->getState() == 1){
-        if(time - this->data.back().position.x >= this->xAxisUnit){
+        if(time - this->data[data.getVertexCount()-1].position.x >= this->xAxisUnit){
 
             sf::Vertex newVertex = sf::Vertex(sf::Vector2f(time, this->entropy->getEntropyValue()));
-            this->data.push_back(newVertex);
-            data[data.size() - 1].color = plotColor;
+            this->data.append(newVertex);
+            data[data.getVertexCount() - 1].color = sf::Color::Blue;
 
-            if(this->data.back().position.y > this->globalMax) globalMax = this->data.back().position.y;
+            if(this->data[data.getVertexCount() - 1].position.y > this->globalMax) globalMax = this->data[data.getVertexCount() - 1].position.y;
 
-            if(this->data.back().position.y < this->globalMin) globalMin = data.back().position.y;
+            if(this->data[data.getVertexCount() - 1].position.y < this->globalMin) globalMin = data[data.getVertexCount() - 1].position.y;
 
-            this->data.push_back(sf::Vertex(sf::Vector2f(newVertex.position.x, data[0].position.y)));
-            this->data[data.size()-1].color = plotColor;
+            this->data.append(sf::Vertex(sf::Vector2f(newVertex.position.x, data[0].position.y)));
+            this->data[data.getVertexCount()-1].color = sf::Color::Blue;
 
-            if(this->data.size() > 400){
+            if(this->data.getVertexCount() > 400){
 
                 for(int i = 3; i < 200; i+=2){
                 
@@ -127,10 +124,8 @@ void Plot::drawPlot(){
                 }
                 this->xAxisUnit *= 2;    
 
-                this->data.resize(data.size() / 2 + 1);
-                this->data.shrink_to_fit();
+                this->data.resize(data.getVertexCount() / 2 + 1);
             }
-             
         }   
 
             movePlotAlongYAxis(-globalMin);
@@ -140,8 +135,8 @@ void Plot::drawPlot(){
             //scale coordinates
             float xf, yf;
 
-            if(abs(this->data.back().position.x) <= ep) xf = 1;
-            else xf = this->maxWidthPlot / data.back().position.x;
+            if(abs(this->data[data.getVertexCount() - 1].position.x) <= ep) xf = 1;
+            else xf = this->maxWidthPlot / data[data.getVertexCount() - 1].position.x;
 
             if(abs(diff) <= ep) yf = 1;
             else yf = this->maxHeightPlot / diff;
@@ -154,7 +149,7 @@ void Plot::drawPlot(){
         //////////////
         //////////////  
         
-            this->window->draw(&data[0], data.size(), sf::TriangleStrip);
+            this->window->draw(data);
 
             //undo transform coordinates
             this->transformViewCoordToCoord();
@@ -167,18 +162,27 @@ void Plot::drawPlot(){
     }
 }
 
-void Plot::keyCallback(){
+void Plot::keyCallback(sf::Event event){
 
+    if(event.type == sf::Event::Resized){
+
+        sf::Vector2f center = this->plotView->getCenter();
+
+        float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+
+        this->plotView->setSize(sf::Vector2f(this->plotView->getSize().x, this->plotView->getSize().x * newRatio));
+        this->plotView->setCenter(sf::Vector2f(center));
+
+    }
 
 }
 
 void Plot::scalePlot(float xFactor, float yFactor){
 
-    std::vector<sf::Vertex>::iterator i;
-    for(i = data.begin(); i != data.end(); i++){
+    for(int i = 0; i < data.getVertexCount(); i++){
 
-        i->position.x = i->position.x * xFactor;
-        i->position.y = i->position.y * yFactor;
+        data[i].position.x = data[i].position.x * xFactor;
+        data[i].position.y = data[i].position.y * yFactor;
     }
 }
 

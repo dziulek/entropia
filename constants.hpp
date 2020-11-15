@@ -42,7 +42,7 @@ const sf::Color backSimColor = sf::Color(120, 127, 99, 255);
 
 //b) plot
 const sf::Color  axisColor = sf::Color(255, 255, 255, 255);
-const sf::Color plotColor = sf::Color(65, 255, 255, 255);
+const sf::Color plotColor = sf::Color(65, 0, 0, 255);
 const sf::Color backPlotColor = sf::Color(160, 154, 118, 255);
 
 //c) stats

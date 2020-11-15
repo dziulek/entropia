@@ -18,7 +18,7 @@ class Plot : public Renderer{
         sf::View* plotView;
         std::vector<float> xlabels;
         std::vector<float> ylabels;
-        std::vector<sf::Vertex> data;
+        sf::VertexArray data;
         float yOffset;
         sf::Vector2f zeroZero;
         float xAxisUnit;
@@ -41,12 +41,13 @@ class Plot : public Renderer{
 
             this->zeroZero = sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim);
 
+            data = sf::VertexArray(sf::TriangleStrip);
             data.clear();
-            data.push_back(sf::Vertex(sf::Vector2f( 0.0f, this->entropy->getEntropyValue())));
-            data[data.size() - 1].color = plotColor;
+            data.append(sf::Vertex(sf::Vector2f( 0.0f, this->entropy->getEntropyValue())));
+            data[0].color = plotColor;
 
-            this->globalMax = data.back().position.y;
-            this->globalMin = data.back().position.y;
+            this->globalMax = data[0].position.y;
+            this->globalMin = data[0].position.y;
 
             xAxisUnit = 0.25;// one quarter of a second
 
@@ -61,7 +62,7 @@ class Plot : public Renderer{
         void drawTicksAndAxis();
         void calculateTicks();
         void scalePlot(float xFactor, float yFactor);
-        void keyCallback();
+        void keyCallback(sf::Event event) override;
         void drawPlot();
         
 };
