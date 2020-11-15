@@ -28,7 +28,7 @@ public:
         this->statsView = &view;
 
         this->lowThresholdDensity = float(entropy->getParticles().size()) * 0.0f / float(numberOfFields * numberOfFields * numberOfFields);
-        this->highThresholdDensity = float(entropy->getParticles().size()) * 16.0f / float(numberOfFields * numberOfFields);
+        this->highThresholdDensity = float(entropy->getParticles().size()) * 2.5f / float(numberOfFields * numberOfFields);
 
     }
     void showView() override;
