@@ -12,13 +12,12 @@ class Renderer{
     public:
         Renderer(sf::RenderWindow &win){
             this->window = &win;
-        };
+        }
         sf::RenderWindow* getWindow();
         virtual void showView();
         static void scaleView(sf::View &v, float factor);
-        void manageViews(sf::View &box, sf::View &stats, sf::View &plot);
-        void resizeWindow();
-        void keycallback();
+        //void resizeView();
+        virtual void keyCallback(sf::Event event){}
 
         static void RenderWindow();
 };

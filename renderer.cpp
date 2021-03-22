@@ -5,5 +5,5 @@ sf::RenderWindow* Renderer::getWindow(){
 }
 
 void Renderer::showView(){
-
+    //function must be overriden
 }

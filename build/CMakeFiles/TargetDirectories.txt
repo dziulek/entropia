@@ -1,3 +1,0 @@
-/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/rebuild_cache.dir
-/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/Enthropy.dir
-/home/piotr/Dokumenty/myProjects/entropia/build/CMakeFiles/edit_cache.dir
