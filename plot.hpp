@@ -56,7 +56,7 @@ class Plot : public Renderer{
 
         }
         ~Plot(){
-            std::cout<<"plot destructor called"<<std::endl;
+            // std::cout<<"plot destructor called"<<std::endl;
         }
         void showView() override;
         void drawTicksAndAxis();

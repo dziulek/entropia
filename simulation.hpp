@@ -25,7 +25,7 @@ class Simulation : public Renderer{
             simView->setCenter(sf::Vector2f(2 * defaultSizeOfStartBox.first, 2 * defaultSizeOfStartBox.second));
         }
         ~Simulation(){
-            std::cout<<"simulation destructor called"<<std::endl;
+            // std::cout<<"simulation destructor called"<<std::endl;
         }
         void showView() override;
         void drawBox();

@@ -38,12 +38,12 @@ const float statsRim = 50.0f;
 const sf::Color particleColor = sf::Color(255, 255, 255, 255);
 const sf::Color spaceColor = sf::Color(122, 157, 255, 255);
 const sf::Color startBoxColor = sf::Color(122, 77, 255, 255);
-const sf::Color backSimColor = sf::Color(120, 127, 99, 255);
+const sf::Color backSimColor = sf::Color(0, 91, 227, 255);
 
 //b) plot
-const sf::Color  axisColor = sf::Color(255, 255, 255, 255);
-const sf::Color plotColor = sf::Color(65, 0, 0, 255);
-const sf::Color backPlotColor = sf::Color(160, 154, 118, 255);
+const sf::Color  axisColor = sf::Color(37, 41, 48, 255);
+const sf::Color plotColor = sf::Color(211, 245, 241, 255);
+const sf::Color backPlotColor = sf::Color(106, 128, 217, 255);
 
 //c) stats
 

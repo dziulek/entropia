@@ -13,7 +13,10 @@ void Plot::drawTicksAndAxis(){
         sf::Vertex(sf::Vector2f(plotRim, this->plotView->getSize().y - plotRim)),
         sf::Vertex(sf::Vector2f(this->plotView->getSize().x - plotRim, this->plotView->getSize().y - plotRim))
     };
-
+    yAxis[0].color = axisColor;
+    yAxis[1].color = axisColor;
+    xAxis[0].color = axisColor;
+    xAxis[1].color = axisColor;
 
     this->window->draw(xAxis, 2, sf::LineStrip);
     this->window->draw(yAxis, 2, sf::LineStrip);
@@ -25,9 +28,13 @@ void Plot::drawTicksAndAxis(){
         sf::Vertex(sf::Vector2f(10.0f, 30.0f))
     };
 
+
+
     for(int i =0; i < 3; i++){
         ySpike[i] = sf::Vertex(sf::Vector2f(ySpike[i].position.x + yAxis[0].position.x, ySpike[i].position.y + yAxis[0].position.y));
     }
+    for(auto & v : ySpike)
+        v.color = axisColor;
 
     this->window->draw(ySpike, 3, sf::Triangles);
 
@@ -40,6 +47,10 @@ void Plot::drawTicksAndAxis(){
     for(int i = 0; i < 3; i++){
         xSpike[i] = sf::Vertex(sf::Vector2f(xSpike[i].position.x + xAxis[1].position.x, xSpike[i].position.y + xAxis[1].position.y));
     }
+
+
+    for(auto & v : xSpike)
+        v.color = axisColor;
 
     this->window->draw(xSpike, 3, sf::Triangles);
 }
@@ -148,6 +159,8 @@ void Plot::drawPlot(){
 
         //////////////
         //////////////  
+            for(int i = 0; i < data.getVertexCount(); i++)
+                data[i].color = plotColor;
         
             this->window->draw(data);
 
