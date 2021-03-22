@@ -178,6 +178,12 @@ void Plot::drawPlot(){
 void Plot::keyCallback(sf::Event event){
 
     if(event.type == sf::Event::Resized){
+        
+        int new_height, new_width;
+        new_height = event.size.height;
+        new_width = event.size.width;
+
+        this->plotView->setViewport(sf::FloatRect(std::max(0.0f, ), 0, ))
 
         sf::Vector2f center = this->plotView->getCenter();
 
