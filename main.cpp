@@ -53,11 +53,13 @@ int main()
 
                 entropy.releaseParticles();
             }
-
+            sim.keyCallback(event);
+            plot.keyCallback(event);
+            stats.keyCallback(event);
             switch (currentWindow)
             {
             case SIMULATION:
-                sim.keyCallback(event);
+                
 
                 break;
             case PLOT:

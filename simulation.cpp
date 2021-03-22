@@ -122,6 +122,11 @@ void Simulation::keyCallback(sf::Event event){
             }
             else if(event.type == sf::Event::Resized){
 
+                float new_height, new_width;
+                new_height = event.size.height;
+                new_width = event.size.width;
+                
+                this->simView->setViewport(sf::FloatRect(0.0f, 0.0f, std::max(0.0f, new_width - new_height/2)/new_width, 1.0f));
                 sf::Vector2f center = this->simView->getCenter();
 
                 float newRatio = event.size.height / (2.0f / 3 * event.size.width);

@@ -59,12 +59,19 @@ void Stats::keyCallback(sf::Event event){
     
     if(event.type == sf::Event::Resized){
 
-        sf::Vector2f center = this->statsView->getCenter();
+        float new_height, new_width;
+        new_height = event.size.height;
+        new_width = event.size.width;
 
-        float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+        float temp = std::max(0.0f, new_width - new_height / 2)/new_width;
 
-        this->statsView->setSize(sf::Vector2f(this->statsView->getSize().x, this->statsView->getSize().x * newRatio));
-        this->statsView->setCenter(sf::Vector2f(center));
+        this->statsView->setViewport(sf::FloatRect(temp, 1.0f/2, 1 - temp, 1.0f/2));
+        // sf::Vector2f center = this->statsView->getCenter();
+
+        // float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+
+        // this->statsView->setSize(sf::Vector2f(this->statsView->getSize().x, this->statsView->getSize().x * newRatio));
+        // this->statsView->setCenter(sf::Vector2f(center));
 
     }
 }

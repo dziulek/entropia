@@ -179,18 +179,20 @@ void Plot::keyCallback(sf::Event event){
 
     if(event.type == sf::Event::Resized){
         
-        int new_height, new_width;
+        float new_height, new_width;
         new_height = event.size.height;
         new_width = event.size.width;
 
-        this->plotView->setViewport(sf::FloatRect(std::max(0.0f, ), 0, ))
+        float temp = std::max(0.0f, new_width - new_height / 2)/new_width;
 
-        sf::Vector2f center = this->plotView->getCenter();
+        this->plotView->setViewport(sf::FloatRect(temp, 0, 1 - temp, 1.0f/2));
 
-        float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+        // sf::Vector2f center = this->plotView->getCenter();
 
-        this->plotView->setSize(sf::Vector2f(this->plotView->getSize().x, this->plotView->getSize().x * newRatio));
-        this->plotView->setCenter(sf::Vector2f(center));
+        // float newRatio = 0.5f * event.size.height / (1.0f / 3 * event.size.width);
+
+        // this->plotView->setSize(sf::Vector2f(this->plotView->getSize().x, this->plotView->getSize().x * newRatio));
+        // this->plotView->setCenter(sf::Vector2f(center));
 
     }
 

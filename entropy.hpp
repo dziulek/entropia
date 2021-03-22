@@ -53,7 +53,6 @@ class Entropy{
             
         }
         ~Entropy(){
-            std::cout<<"entropy destructor called"<<std::endl;
         }
         std::vector<Particle> & getParticles();
         void releaseParticles();
