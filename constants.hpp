@@ -8,7 +8,7 @@
 
 const float epsilon = 0.1;//for crashes
 const float ep = 0.0000001;
-const float defaultNumParticles = 1000;
+const float defaultNumParticles = 3000;
 const float defaultWidth = 200;
 const float defaultHeight = 200;
 const std::pair<float, float> defaultCorner = {10.0f, 10.0f};
